@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="th" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
@@ -67,6 +67,9 @@
                 
                 <!-- Quick Actions with vibrant emerald colors -->
                 <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="fetchDataFromGoogleSheets()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white border border-white/10 text-sm font-bold rounded-xl shadow-md transition-all">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 text-cyan-200" id="sync-spinner"></i> ซิงค์ดึงข้อมูลล่าสุด
+                    </button>
                     <button onclick="openNewAuditForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-extrabold rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 border border-white/10">
                         <i data-lucide="plus" class="w-4 h-4"></i> เริ่มประเมินใหม่
                     </button>
@@ -399,155 +402,66 @@
                     <h4 class="text-sm font-extrabold text-slate-700 flex items-center gap-1.5">
                         <i data-lucide="code" class="w-4 h-4 text-cyan-600"></i> 2. ซอร์สโค้ด Google Apps Script (ติดตั้งบนระบบชีตสเปรดชีตคุณ)
                     </h4>
-                    <p class="text-xs text-slate-500">นำโค้ดด้านล่างนี้ไปวางในเมนู <strong>Extensions (ส่วนขยาย) > Apps Script</strong> บนสเปรดชีตของคุณ จากนั้นกด <strong>Deploy > New Deployment (การทำให้ใช้งานได้ใหม่) > เลือกประเภทเป็น Web App</strong> เพื่อรับ Web App URL และนำมาวางในช่องด้านบน:</p>
+                    <p class="text-xs text-slate-550">คุณสามารถติดตั้งฟังก์ชัน <strong>doGet</strong> และ <strong>doPost</strong> เวอร์ชันปรับปรุงล่าสุดนี้บน Apps Script เพื่อส่งผ่านข้อมูลประเมินแบบ 2 ทิศทาง ทำให้สามารถใช้งานข้อมูลชุดเดียวกันได้จากทุกเครื่อง:</p>
                     <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-[11px] overflow-x-auto border border-slate-800 shadow-inner">
-                        <pre>function doPost(e) {
+                        <pre>function doGet(e) {
   try {
-    var params = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName("AuditData");
+    if (!sheet) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
     
-    var isNew = false;
-    if (!sheet) {
-      sheet = ss.insertSheet("AuditData");
-      isNew = true;
+    var rows = sheet.getDataRange().getValues();
+    if (rows.length &lt;= 1) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+    
+    var data = [];
+    for (var i = 1; i &lt; rows.length; i++) {
+      var row = rows[i];
+      var evalDateStr = "";
+      if (row[1]) {
+        if (row[1] instanceof Date) {
+          var y = row[1].getFullYear();
+          var m = ("0" + (row[1].getMonth() + 1)).slice(-2);
+          var d = ("0" + row[1].getDate()).slice(-2);
+          evalDateStr = y + "-" + m + "-" + d;
+        } else {
+          evalDateStr = String(row[1]).split("T")[0];
+        }
+      }
+      
+      var checklist = {};
+      var totalNA = 0;
+      for (var j = 1; j &lt;= 16; j++) {
+        var statusText = row[j + 1];
+        var status = "na";
+        if (statusText === "ปฏิบัติ") status = "yes";
+        else if (statusText === "ไม่ปฏิบัติ") status = "no";
+        checklist[j] = status;
+        if (status === "na") totalNA++;
+      }
+      
+      var complianceRate = 0;
+      if (row[20] !== undefined && row[20] !== "") {
+        complianceRate = parseFloat((row[20] * 100).toFixed(1));
+      }
+      
+      data.push({
+        id: "sheet_" + i + "_" + new Date(row[0]).getTime(),
+        evalDate: evalDateStr,
+        checklist: checklist,
+        notes: {}, 
+        generalNotes: row[21] || "",
+        complianceRate: complianceRate,
+        totalComplied: parseInt(row[18]) || 0,
+        totalNotComplied: parseInt(row[19]) || 0,
+        totalApplicable: (parseInt(row[18]) || 0) + (parseInt(row[19]) || 0),
+        totalNA: totalNA
+      });
     }
-    
-    // ตั้งชื่อหัวคอลัมน์สถิติการปฏิบัติให้สอดรับกับความต้องการในการนำเสนอข้อมูล
-    var headers = [
-      "วันเวลาบันทึก (Timestamp)", 
-      "วันที่ประเมิน (Audit Date)", 
-      "1. แจ้ง ICN ทันที", 
-      "2. แจ้งบุคลากรทราบ", 
-      "3. แยกผู้ป่วย/โซน", 
-      "4. ติดป้าย Contact precautions", 
-      "5. ไม่วางของบนเตียง", 
-      "6. แยกอุปกรณ์ของใช้", 
-      "7. เตรียม Alcohol gel", 
-      "8. ล้างมือด้วยน้ำยา 4% CHG", 
-      "9. สวม PPE (ถุงมือ/เสื้อคลุม/Mask)", 
-      "10. แยกผ้าและขยะติดเชื้อ", 
-      "11. ทำความสะอาดสิ่งแวดล้อม", 
-      "12. เคลื่อนย้ายแจ้งหน่วยงาน", 
-      "13. พนักงานเปลสวม PPE", 
-      "14. จำกัดบุคลากร/ผู้เฝ้าไข้", 
-      "15. แนะนำผู้ป่วยและญาติ", 
-      "16. ทำการเพาะเชื้อเพื่อยุติ", 
-      "ปฏิบัติ (YES)", 
-      "ไม่ปฏิบัติ (NO)", 
-      "อัตราปฏิบัติถูกต้อง (Compliance %)", 
-      "บันทึกเพิ่มเติมภาพรวม (generalNotes)"
-    ];
-    
-    if (isNew || sheet.getLastRow() === 0) {
-      sheet.appendRow(headers);
-      formatHeaderAndApplyRules(sheet);
-    }
-    
-    function mapStatus(val) {
-      if (val === "yes") return "ปฏิบัติ";
-      if (val === "no") return "ไม่ปฏิบัติ";
-      return "ไม่เกี่ยวข้อง (N/A)";
-    }
-    
-    var rowData = [
-      new Date(),
-      params.audit_date || "",
-      mapStatus(params.check1),
-      mapStatus(params.check2),
-      mapStatus(params.check3),
-      mapStatus(params.check4),
-      mapStatus(params.check5),
-      mapStatus(params.check6),
-      mapStatus(params.check7),
-      mapStatus(params.check8),
-      mapStatus(params.check9),
-      mapStatus(params.check10),
-      mapStatus(params.check11),
-      mapStatus(params.check12),
-      mapStatus(params.check13),
-      mapStatus(params.check14),
-      mapStatus(params.check15),
-      mapStatus(params.check16),
-      params.score_yes || 0,
-      params.score_no || 0,
-      parseFloat(params.compliance_percent || 0) / 100, // ส่งทศนิยมเพื่อแปลง Format เป็น % ในชีต
-      params.generalNotes || ""
-    ];
-    
-    sheet.appendRow(rowData);
-    
-    var lastRow = sheet.getLastRow();
-    sheet.getRange(lastRow, 21).setNumberFormat("0.0%");
-    sheet.getRange(lastRow, 1, 1, sheet.getLastColumn()).setVerticalAlignment("middle");
-    
-    return ContentService.createTextOutput(JSON.stringify({result: "success", row: lastRow}))
-      .setMimeType(ContentService.MimeType.JSON);
+    data.sort(function(a, b) { return new Date(b.evalDate) - new Date(a.evalDate); });
+    return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
   } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({result: "error", error: err.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({result: "error", error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-// ฟังก์ชันระบายสีและจัดรูปเพื่อความสวยงามในรูปแบบ Dashboard สาธารณสุข
-function formatHeaderAndApplyRules(sheet) {
-  var headerRange = sheet.getRange(1, 1, 1, 22);
-  headerRange.setBackground("#0891b2") // Teal Modern
-             .setFontColor("#ffffff")
-             .setFontWeight("bold")
-             .setHorizontalAlignment("center")
-             .setVerticalAlignment("middle")
-             .setWrap(true);
-             
-  sheet.setRowHeight(1, 42);
-  sheet.setFrozenRows(1);
-  sheet.setFrozenColumns(2); 
-  
-  sheet.autoResizeColumns(1, 22);
-  
-  var rules = [];
-  
-  // กฎ 1: ปฏิบัติ -> สีเขียวพาสเทลสะอาด
-  rules.push(SpreadsheetApp.newConditionalFormatRule()
-    .whenTextEqualTo("ปฏิบัติ")
-    .setBackground("#d1fae5")
-    .setFontColor("#065f46")
-    .setRanges([sheet.getRange("C2:R1000")])
-    .build());
-    
-  // กฎ 2: ไม่ปฏิบัติ -> สีแดงพาสเทลแจ้งเตือน
-  rules.push(SpreadsheetApp.newConditionalFormatRule()
-    .whenTextEqualTo("ไม่ปฏิบัติ")
-    .setBackground("#ffe4e6")
-    .setFontColor("#9f1239")
-    .setRanges([sheet.getRange("C2:R1000")])
-    .build());
-    
-  // กฎ 3: N/A -> สีเทาอ่อนเรียบหรู
-  rules.push(SpreadsheetApp.newConditionalFormatRule()
-    .whenTextEqualTo("ไม่เกี่ยวข้อง (N/A)")
-    .setBackground("#f1f5f9")
-    .setFontColor("#64748b")
-    .setRanges([sheet.getRange("C2:R1000")])
-    .build());
-    
-  // กฎ 4: คะแนนเกิน 80% (ความร่วมมือดีมาก) -> เขียวเด่น
-  rules.push(SpreadsheetApp.newConditionalFormatRule()
-    .whenNumberGreaterThanOrEqualTo(0.8)
-    .setBackground("#d1fae5")
-    .setFontColor("#065f46")
-    .setRanges([sheet.getRange("U2:U1000")])
-    .build());
-    
-  // กฎ 5: คะแนนน้อยกว่า 50% (ต้องปรับปรุงด่วน) -> แดงเด่น
-  rules.push(SpreadsheetApp.newConditionalFormatRule()
-    .whenNumberLessThan(0.5)
-    .setBackground("#ffe4e6")
-    .setFontColor("#9f1239")
-    .setRanges([sheet.getRange("U2:U1000")])
-    .build());
-    
-  sheet.setConditionalFormatRules(rules);
 }</pre>
                     </div>
                 </div>
@@ -570,6 +484,12 @@ function formatHeaderAndApplyRules(sheet) {
         APPLICATION JAVASCRIPT (CORE LOGIC)
        ========================================== -->
     <script>
+        // ----------------------------------------------------
+        // CONFIGURATION: สามารถคัดลอกลิงก์ Web App URL จาก Google Apps Script 
+        // มาวางในตัวแปรด้านล่างนี้ได้เลย เพื่อให้ทุกเครื่องเข้าถึงข้อมูลร่วมกันโดยไม่ต้องตั้งค่าทีละเครื่อง!
+        // ----------------------------------------------------
+        const HARDCODED_WEBHOOK_URL = ""; 
+
         const CHECKLIST_ITEMS = [
             { id: 1, text: "แจ้ง ICN ทันทีเมื่อมีผู้ป่วยติดเชื้อดื้อยามาใช้บริการ โทร 102" },
             { id: 2, text: "แจ้งบุคลากรทุกคนในหอผู้ป่วยทราบ" },
@@ -658,14 +578,47 @@ function formatHeaderAndApplyRules(sheet) {
             
             applyFilters();
             lucide.createIcons();
+
+            // ดึงข้อมูลล่าสุดจาก Google Sheets ทันทีที่เปิดแอป (ถ้ามีการตั้งค่า Webhook)
+            fetchDataFromGoogleSheets();
         };
+
+        // ฟังก์ชันดึงข้อมูลจาก Google Sheets เพื่ออัปเดต แดชบอร์ด และประวัติ ให้ตรงกันทุกเครื่อง
+        async function fetchDataFromGoogleSheets() {
+            const webhookUrl = localStorage.getItem('mdro_webhook_url') || HARDCODED_WEBHOOK_URL;
+            if (!webhookUrl) {
+                // หากยังไม่มี Webhook ให้ทำงานจาก Local Cache ของเครื่องนั้นไปก่อน
+                return;
+            }
+
+            const spinner = document.getElementById('sync-spinner');
+            if (spinner) spinner.classList.add('animate-spin');
+
+            try {
+                const response = await fetch(webhookUrl);
+                if (!response.ok) throw new Error("ไม่สามารถเรียกขอข้อมูลจาก Google Sheets ได้");
+                const cloudData = await response.json();
+                
+                if (cloudData && Array.isArray(cloudData)) {
+                    audits = cloudData;
+                    saveAuditsToStorage(); // บันทึกสถิติท้องถิ่นร่วมด้วยเผื่อเปิดออฟไลน์
+                    applyFilters();
+                    showToast("ซิงค์ดึงข้อมูลล่าสุดจาก Google Sheets (AuditData) เรียบร้อย", "success");
+                }
+            } catch (err) {
+                console.error("Fetch Google Sheets Error: ", err);
+                showToast("ไม่สามารถซิงค์ดึงข้อมูลจากชีตได้โดยอัตโนมัติ (ตรวจสอบสิทธิ์การตั้งค่า Web App)", "error");
+            } finally {
+                if (spinner) spinner.classList.remove('animate-spin');
+            }
+        }
 
         function loadAuditsFromStorage() {
             const raw = localStorage.getItem('mdro_audits');
             if (raw) {
                 audits = JSON.parse(raw);
             } else {
-                // Pre-populate mock historical audits
+                // ข้อมูลสถิติจำลองพื้นฐาน
                 const mockData = [
                     {
                         id: "mock-1",
@@ -682,14 +635,6 @@ function formatHeaderAndApplyRules(sheet) {
                         notes: {},
                         generalNotes: "ยอดเยี่ยม ปฏิบัติถูกต้องครบ 100%",
                         complianceRate: 100.0, totalApplicable: 16, totalComplied: 16, totalNotComplied: 0, totalNA: 0
-                    },
-                    {
-                        id: "mock-3",
-                        evalDate: "2025-04-12",
-                        checklist: {1:'yes', 2:'no', 3:'yes', 4:'no', 5:'no', 6:'yes', 7:'yes', 8:'no', 9:'yes', 10:'yes', 11:'no', 12:'yes', 13:'yes', 14:'yes', 15:'na', 16:'na'},
-                        notes: {},
-                        generalNotes: "ข้อมูลสถิติรอบปี 2568",
-                        complianceRate: 64.3, totalApplicable: 14, totalComplied: 9, totalNotComplied: 5, totalNA: 2
                     }
                 ];
                 audits = mockData;
@@ -720,8 +665,18 @@ function formatHeaderAndApplyRules(sheet) {
         function loadWebhookSettings() {
             const savedUrl = localStorage.getItem('mdro_webhook_url');
             const savedAuto = localStorage.getItem('mdro_auto_sync');
-            if (savedUrl) document.getElementById('webhook-url-input').value = savedUrl;
-            if (savedAuto === 'true') document.getElementById('auto-sync-checkbox').checked = true;
+            
+            // ใช้ค่าจาก Hardcoded Webhook URL หากไม่ได้ระบุไว้ใน Local Storage
+            const activeUrl = savedUrl || HARDCODED_WEBHOOK_URL;
+            if (activeUrl) document.getElementById('webhook-url-input').value = activeUrl;
+            
+            // ตั้งค่า Auto-Sync เป็น True เสมอเพื่อตอบโจทย์ "เก็บข้อมูลในชีตตลอดเวลาไม่ว่าจะเครื่องไหน"
+            if (savedAuto === null) {
+                localStorage.setItem('mdro_auto_sync', 'true');
+                document.getElementById('auto-sync-checkbox').checked = true;
+            } else {
+                document.getElementById('auto-sync-checkbox').checked = (savedAuto === 'true');
+            }
         }
 
         function saveWebhookSettings() {
@@ -841,7 +796,7 @@ function formatHeaderAndApplyRules(sheet) {
 
         function setAnswer(itemId, val) {
             formAnswers[itemId] = val;
-            document.querySelectorAll(`.choice-btn-${itemId}`).forEach(btn => btn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all text-slate-500 hover:text-slate-800 flex items-center gap-1`);
+            document.querySelectorAll(`.choice-btn-${itemId}`).forEach(btn => btn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all text-slate-550 hover:text-slate-850 flex items-center gap-1`);
             const activeBtn = document.getElementById(`btn-${val}-${itemId}`);
             if (val === 'yes') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-emerald-500 text-white shadow-sm`;
             if (val === 'no') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-rose-500 text-white shadow-sm`;
@@ -906,8 +861,8 @@ function formatHeaderAndApplyRules(sheet) {
 
             saveAuditsToStorage();
 
-            // Auto sync webhook to target sheet AuditData
-            const webhookUrl = localStorage.getItem('mdro_webhook_url');
+            // ส่งข้อมูลขึ้น Google Sheets แผ่นงาน AuditData ทันทีหลังกดบันทึก
+            const webhookUrl = localStorage.getItem('mdro_webhook_url') || HARDCODED_WEBHOOK_URL;
             const autoSync = localStorage.getItem('mdro_auto_sync') === 'true';
             if (webhookUrl && autoSync) {
                 const syncPayload = {
@@ -929,6 +884,11 @@ function formatHeaderAndApplyRules(sheet) {
                         body: JSON.stringify(syncPayload)
                     });
                     showToast("ซิงค์เข้าระบบ Google Sheets (แผ่นงาน: AuditData) สำเร็จ!");
+                    
+                    // ดึงข้อมูลภาพรวมกลับมาอัปเดตใหม่อีกครั้งให้สมบูรณ์
+                    setTimeout(() => {
+                        fetchDataFromGoogleSheets();
+                    }, 1200);
                 } catch (err) {
                     console.error("Sync error:", err);
                     showToast("การส่งขึ้น Google Sheets ล้มเหลว โปรดตรวจสอบ Webhook URL", "error");
@@ -1255,7 +1215,7 @@ function formatHeaderAndApplyRules(sheet) {
                 container.innerHTML = `
                     <div class="bg-white p-8 text-center rounded-3xl shadow-md border border-slate-100 flex flex-col items-center justify-center">
                         <i data-lucide="clipboard-list" class="w-10 h-10 text-slate-300 mb-2"></i>
-                        <p class="text-slate-500 font-bold text-sm">ไม่พบประวัติผลการประเมินที่ตรงกัน</p>
+                        <p class="text-slate-550 font-bold text-sm">ไม่พบประวัติผลการประเมินที่ตรงกัน</p>
                     </div>
                 `;
                 lucide.createIcons();
@@ -1305,7 +1265,7 @@ function formatHeaderAndApplyRules(sheet) {
             let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
             const headers = ["รหัสบันทึก", "วันที่ประเมิน", "% ปฏิบัติถูกต้อง", "รวมข้อปฏิบัติ", "รวมข้อไม่ปฏิบัติ", "รวมข้อไม่เกี่ยวข้อง"];
             CHECKLIST_ITEMS.forEach(item => {
-                headers.push(`ข้อ ${item.id} สถานะ`, `ข้อ ${item.id} หมายเหตุ`);
+                headers.push(`ข้อ ${item.id} : สถานะ`, `ข้อ ${item.id} : หมายเหตุ`);
             });
             headers.push("หมายเหตุทั่วไปภาพรวม");
 
@@ -1371,6 +1331,11 @@ function formatHeaderAndApplyRules(sheet) {
                 }
             }
             showToast(`นำส่งข้อมูลสำเร็จทั้งสิ้น ${successCount} แถวขึ้น Google Sheets (AuditData)`);
+            
+            // เรียกขอสถิติกลับมาอัปเดตแบบเรียลไทม์
+            setTimeout(() => {
+                fetchDataFromGoogleSheets();
+            }, 1000);
         }
     </script>
 </body>
