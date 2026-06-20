@@ -14,7 +14,6 @@
         body {
             font-family: 'Sarabun', 'Inter', sans-serif;
         }
-        /* Custom scrollbar hiding */
         .scrollbar-none::-webkit-scrollbar {
             display: none;
         }
@@ -29,48 +28,48 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- Header Banner -->
-    <header class="bg-gradient-to-r from-emerald-700 via-teal-700 to-cyan-800 text-white shadow-md">
+    <!-- Header Banner with bright, vibrant gradient -->
+    <header class="bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-600 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="bg-white/15 p-2.5 rounded-xl border border-white/10 backdrop-blur-sm">
-                        <i data-lucide="clipboard-list" class="w-8 h-8 text-emerald-300"></i>
+                    <div class="bg-white/20 p-2.5 rounded-xl border border-white/20 backdrop-blur-md shadow-inner">
+                        <i data-lucide="clipboard-list" class="w-8 h-8 text-yellow-300"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl md:text-2xl font-bold tracking-tight">แบบประเมินการปฏิบัติในการดูแลผู้ป่วยเชื้อดื้อยา (MDR Checklist)</h1>
-                        <p class="text-emerald-100 text-xs md:text-sm font-medium mt-0.5">
-                            เวอร์ชันประเมินด่วน (ไม่ระบุตัวตนผู้ป่วย) • โรงพยาบาลพุนพิน (ปรับปรุง ต.ค. 2567)
+                        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight drop-shadow-sm">แบบประเมินการปฏิบัติในการดูแลผู้ป่วยเชื้อดื้อยา (MDR Checklist)</h1>
+                        <p class="text-cyan-50 text-xs md:text-sm font-medium mt-0.5 opacity-95">
+                            ระบบบันทึกแบบประเมินด่วน (ไม่ระบุตัวตน) • โรงพยาบาลพุนพิน
                         </p>
                     </div>
                 </div>
                 
-                <!-- Quick Actions -->
+                <!-- Quick Actions with vibrant emerald colors -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="openNewAuditForm()" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-md transition-all transform active:scale-95">
-                        <i data-lucide="plus" class="w-4 h-4"></i> เริ่มประเมินด่วน
+                    <button onclick="openNewAuditForm()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-extrabold rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95 border border-white/10">
+                        <i data-lucide="plus" class="w-4 h-4"></i> เริ่มประเมินใหม่
                     </button>
-                    <button onclick="handleExportCSV()" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white border border-white/15 text-sm font-semibold rounded-xl transition-all">
-                        <i data-lucide="download" class="w-4 h-4 text-emerald-300"></i> ส่งออก CSV
+                    <button onclick="handleExportCSV()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 active:bg-white/30 text-white border border-white/20 text-sm font-bold rounded-xl shadow-md transition-all">
+                        <i data-lucide="download" class="w-4 h-4 text-cyan-200"></i> ส่งออก CSV
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="border-t border-white/10 bg-black/10">
+        <!-- Navigation Tabs with bright active state -->
+        <div class="border-t border-white/10 bg-black/15 backdrop-blur-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="flex space-x-1 py-2 overflow-x-auto scrollbar-none" aria-label="Tabs">
-                    <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all bg-white text-emerald-900 shadow-sm">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i> แดชบอร์ดวิเคราะห์ผล
+                    <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all bg-white text-cyan-950 shadow-md">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-600"></i> แดชบอร์ดวิเคราะห์ผล
                     </button>
-                    <button onclick="switchTab('form')" id="btn-tab-form" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all text-emerald-100 hover:bg-white/10 hover:text-white">
+                    <button onclick="switchTab('form')" id="btn-tab-form" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all text-cyan-100 hover:bg-white/10 hover:text-white">
                         <i data-lucide="clipboard-list" class="w-4 h-4"></i> <span id="form-tab-text">บันทึกประเมินใหม่</span>
                     </button>
-                    <button onclick="switchTab('list')" id="btn-tab-list" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all text-emerald-100 hover:bg-white/10 hover:text-white">
-                        <i data-lucide="database" class="w-4 h-4"></i> ประวัติการประเมิน (<span id="count-badge">0</span>)
+                    <button onclick="switchTab('list')" id="btn-tab-list" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all text-cyan-100 hover:bg-white/10 hover:text-white">
+                        <i data-lucide="database" class="w-4 h-4"></i> ประวัติการประเมิน (<span id="count-badge" class="bg-cyan-900/40 text-cyan-200 text-xs px-1.5 py-0.5 rounded-md font-bold font-mono">0</span>)
                     </button>
-                    <button onclick="switchTab('sync')" id="btn-tab-sync" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all text-emerald-100 hover:bg-white/10 hover:text-white">
+                    <button onclick="switchTab('sync')" id="btn-tab-sync" class="tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all text-cyan-100 hover:bg-white/10 hover:text-white">
                         <i data-lucide="settings" class="w-4 h-4"></i> ตั้งค่า Google Sheets
                     </button>
                 </nav>
@@ -86,101 +85,168 @@
            ========================================== -->
         <section id="tab-dashboard" class="tab-content space-y-6">
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
-                <span class="text-sm font-bold text-slate-500">ข้อมูลสถิติรวมของระบบ</span>
-                <div class="text-xs text-slate-400 text-right" id="dash-summary-count">
-                    วิเคราะห์ผลประเมินจากทั้งหมด 0 รายการ
+            <!-- MASTER FILTER CONTROLS with colorful header -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-cyan-50 p-1.5 rounded-lg">
+                            <i data-lucide="filter" class="w-5 h-5 text-cyan-500"></i>
+                        </div>
+                        <h2 class="text-sm font-extrabold text-slate-700">ตัวกรองเรียกดูรายงานและข้อมูลสถิติ</h2>
+                    </div>
+                    <span class="text-xs bg-cyan-50 text-cyan-700 px-3 py-1 rounded-full font-bold" id="dash-summary-count">
+                        วิเคราะห์ผลจากทั้งหมด 0 รายการ
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 mb-1.5">รูปแบบการกรอง</label>
+                        <select id="filter-type" onchange="toggleFilterInputs()" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400">
+                            <option value="all">แสดงข้อมูลทั้งหมด</option>
+                            <option value="year">เลือกรายปี</option>
+                            <option value="range">เลือกช่วงวันที่กำหนดเอง</option>
+                        </select>
+                    </div>
+                    
+                    <div id="filter-year-container" class="hidden">
+                        <label class="block text-xs font-extrabold text-slate-500 mb-1.5">ปี พ.ศ. (ค.ศ.)</label>
+                        <select id="filter-year" onchange="applyFilters()" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 focus:ring-2 focus:ring-cyan-400">
+                            <option value="2026">2569 (2026)</option>
+                            <option value="2025">2568 (2025)</option>
+                            <option value="2024">2567 (2024)</option>
+                        </select>
+                    </div>
+                    
+                    <div id="filter-start-container" class="hidden">
+                        <label class="block text-xs font-extrabold text-slate-500 mb-1.5">ตั้งแต่วันที่</label>
+                        <input type="date" id="filter-start-date" onchange="applyFilters()" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium text-slate-700 focus:ring-2 focus:ring-cyan-400">
+                    </div>
+                    
+                    <div id="filter-end-container" class="hidden">
+                        <label class="block text-xs font-extrabold text-slate-500 mb-1.5">ถึงวันที่</label>
+                        <input type="date" id="filter-end-date" onchange="applyFilters()" class="w-full bg-slate-55 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium text-slate-700 focus:ring-2 focus:ring-cyan-400">
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button onclick="resetFilters()" class="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1">
+                            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> รีเซ็ตตัวกรอง
+                        </button>
+                        <button onclick="clearAllData()" class="py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1" title="ล้างข้อมูลทั้งหมด">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> ล้างข้อมูลเครื่อง
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Score Circular Gauge -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center">
-                    <h3 class="text-slate-500 font-bold text-sm uppercase tracking-wider mb-4">อัตราการปฏิบัติถูกต้องภาพรวม</h3>
-                    <div class="relative flex items-center justify-center">
-                        <svg class="w-36 h-36 transform -rotate-90">
-                            <circle cx="72" cy="72" r="60" class="stroke-slate-100 fill-none" stroke-width="12" />
-                            <circle id="gauge-circle" cx="72" cy="72" r="60" class="stroke-emerald-500 fill-none transition-all duration-1000 ease-out" stroke-width="12" stroke-dasharray="376.9" stroke-dashoffset="376.9" />
-                        </svg>
-                        <div class="absolute text-center">
-                            <span id="dash-compliance-text" class="text-3xl font-extrabold text-slate-800">0%</span>
-                            <span class="block text-[10px] font-semibold text-emerald-600 mt-0.5 uppercase tracking-wider">Compliance</span>
-                        </div>
-                    </div>
-                    <p class="mt-4 text-xs text-slate-400 max-w-xs">คำนวณจากข้อปฏิบัติที่เข้าข่ายทั้งหมด (ไม่รวมข้อที่เป็น N/A)</p>
-                </div>
-
-                <!-- Total Audits Stats -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+            <!-- AUDITS COUNT OVERVIEW & DYNAMIC LINE TREND -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- KPI 1: Audits Count Card with glowing border -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-cyan-100 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-28 h-28 bg-gradient-to-br from-cyan-400 to-indigo-500 opacity-10 rounded-full blur-xl"></div>
                     <div>
-                        <h3 class="text-slate-500 font-bold text-sm uppercase tracking-wider mb-2">จำนวนครั้งการตรวจประเมิน</h3>
-                        <div class="flex items-baseline gap-2">
-                            <span id="dash-total-audits" class="text-5xl font-black text-slate-800">0</span>
-                            <span class="text-slate-500 font-semibold text-sm">รอบบันทึก</span>
+                        <h3 class="text-slate-500 font-extrabold text-xs uppercase tracking-wider mb-2">จำนวนรอบตรวจประเมินทั้งหมด</h3>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <span id="dash-total-audits" class="text-5xl font-black text-cyan-600 font-sans tracking-tight">0</span>
+                            <span class="text-slate-400 font-extrabold text-xs">รอบตรวจ</span>
                         </div>
                     </div>
-                    <div class="space-y-2 mt-4 pt-4 border-t border-slate-100 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-slate-500">ผลประเมินผ่านเกณฑ์ ( ≥ 80% ):</span>
-                            <span id="dash-passed-count" class="font-bold text-emerald-600 font-mono">0 รายการ</span>
+                    <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-slate-100 text-xs">
+                        <div class="bg-emerald-50/70 p-2.5 rounded-xl border border-emerald-100">
+                            <span class="text-slate-500 block font-semibold mb-0.5">ร่วมมือ 100% เต็ม:</span>
+                            <span id="dash-perfect-count" class="font-extrabold text-emerald-600 font-mono text-sm">0 ครั้ง</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-500">ผลประเมินต่ำกว่าเกณฑ์ ( &lt; 80% ):</span>
-                            <span id="dash-failed-count" class="font-bold text-rose-500 font-mono">0 รายการ</span>
+                        <div class="bg-rose-50/70 p-2.5 rounded-xl border border-rose-100">
+                            <span class="text-slate-500 block font-semibold mb-0.5">ต่ำกว่า 50%:</span>
+                            <span id="dash-poor-count" class="font-extrabold text-rose-500 font-mono text-sm">0 ครั้ง</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recent Status Distribution -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <!-- KPI 2: Line Trend Chart Card -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-indigo-50 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-slate-500 font-bold text-sm uppercase tracking-wider mb-3">ภาพรวมเกณฑ์ความร่วมมือ</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                                    <span>รอบที่ปฏิบัติได้ถูกต้อง 100% เต็ม</span>
-                                    <span id="dash-perfect-percent" class="text-emerald-600">0%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                                    <div id="dash-perfect-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                                    <span>รอบที่มีความร่วมมือต่ำกว่า 50%</span>
-                                    <span id="dash-poor-percent" class="text-rose-500">0%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                                    <div id="dash-poor-bar" class="h-full bg-rose-500 rounded-full transition-all duration-500" style="width: 0%"></div>
-                                </div>
-                            </div>
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-slate-500 font-extrabold text-xs uppercase tracking-wider">แนวโน้มความสมบูรณ์การปฏิบัติ (Trend Line)</h3>
+                            <span class="bg-indigo-50 text-indigo-700 text-[10px] px-2 py-0.5 rounded font-extrabold">สถิติ 10 รอบล่าสุด</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-2">แสดงการพัฒนาเรียงจากอดีต → ล่าสุด (แกน Y: 0% - 100%)</p>
+                        <div class="h-28" id="trend-chart-container">
+                            <!-- Line Chart rendered dynamically via JS -->
                         </div>
                     </div>
-                    <button onclick="switchTab('list')" class="text-xs font-bold text-teal-600 hover:text-teal-700 mt-4 flex items-center justify-end gap-1">
-                        ไปที่รายการบันทึกประวัติทั้งหมด <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </button>
                 </div>
             </div>
 
-            <!-- List of 16 Checklist Items Stats -->
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-4 mb-6 gap-3">
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-800">เปอร์เซ็นต์การปฏิบัติสะสม รายข้อปฏิบัติ (16 ข้อ)</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">วิเคราะห์จากสัดส่วนการปฏิบัติ (Yes) เทียบกับการไม่ปฏิบัติ (No) ไม่รวม N/A</p>
+            <!-- ==========================================================
+                HORIZONTAL BAR CHART (ผลการปฏิบัติรายข้อ)
+               ========================================================== -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-slate-100">
+                <div class="border-b border-slate-100 pb-3 mb-6">
+                    <h3 class="text-lg font-extrabold text-slate-800">แผนภูมิผลการปฏิบัติรายข้อ</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">เปอร์เซ็นต์การปฏิบัติถูกต้องแยกรายข้อ (ความสดใสของแถบสะท้อนสถิติในการดูแลผู้ป่วย)</p>
+                </div>
+
+                <!-- Chart Wrapper with Grid System -->
+                <div class="relative py-4">
+                    <!-- Background Guide Grid Lines at 0%, 30%, 60%, 90% -->
+                    <div class="absolute inset-0 pl-16 pr-6 pt-2 pb-10 flex justify-between pointer-events-none z-0">
+                        <div class="h-full border-l border-slate-100"></div> <!-- 0% Grid -->
+                        <div class="h-full border-l border-dashed border-slate-200/80"></div> <!-- 30% Grid -->
+                        <div class="h-full border-l border-dashed border-slate-200/80"></div> <!-- 60% Grid -->
+                        <div class="h-full border-l border-dashed border-slate-200/80"></div> <!-- 90% Grid -->
+                        <div class="h-full border-l border-slate-100"></div> <!-- 100% Grid -->
                     </div>
-                    <div class="flex items-center gap-4 text-xs font-semibold">
-                        <span class="flex items-center gap-1.5 text-slate-500">
-                            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></span> ปฏิบัติถูกต้อง
-                        </span>
-                        <span class="flex items-center gap-1.5 text-slate-500">
-                            <span class="w-2.5 h-2.5 bg-rose-400 rounded-full"></span> ไม่ได้ปฏิบัติ
-                        </span>
+
+                    <!-- Chart Bars Stacked vertically -->
+                    <div id="image-bar-chart-container" class="space-y-4 relative z-10 pl-16 pr-6">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <!-- Bottom Axis Labels -->
+                    <div class="absolute bottom-[-16px] left-0 right-0 pl-16 pr-6 flex justify-between text-[11px] font-bold text-slate-400 select-none">
+                        <span>0%</span>
+                        <span>30%</span>
+                        <span>60%</span>
+                        <span>90%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
+                <!-- TOP 5 PROBLEMS with striking bright pink colors -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-rose-100 lg:col-span-1 flex flex-col justify-between">
+                    <div>
+                        <div class="border-b border-rose-100 pb-3 mb-4">
+                            <h3 class="text-sm font-extrabold text-rose-600 flex items-center gap-1.5">
+                                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-500"></i>
+                                Top 5 ข้อที่ปฏิบัติได้น้อยที่สุด
+                            </h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">รายการความเสี่ยงสูงที่ต้องได้รับการนิเทศและเน้นย้ำ</p>
+                        </div>
+                        <div id="top-failed-container" class="space-y-3">
+                            <!-- Dynamic generation -->
+                        </div>
                     </div>
                 </div>
 
-                <div id="items-statistics-container" class="space-y-5">
-                    <!-- Dynamic generation via JS -->
+                <!-- SUMMARY TABLE & PERCENTAGE 1-16 with clear vibrant indicators -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 lg:col-span-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
+                        <div>
+                            <h3 class="text-sm font-extrabold text-slate-800">ตารางสรุป % ปฏิบัติ / ไม่ปฏิบัติ รายข้อ (1-16 ข้อ)</h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">วิเคราะห์อัตราการปฏิบัติตามมาตรฐานอย่างโปร่งใส</p>
+                        </div>
+                        <div class="flex items-center gap-3 text-[10px] font-bold">
+                            <span class="flex items-center gap-1 text-slate-500"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></span>ปฏิบัติ</span>
+                            <span class="flex items-center gap-1 text-slate-500"><span class="w-2.5 h-2.5 bg-rose-400 rounded-full"></span>ไม่ปฏิบัติ</span>
+                        </div>
+                    </div>
+
+                    <div id="items-statistics-container" class="space-y-3.5 max-h-[380px] overflow-y-auto pr-1 scrollbar-none">
+                        <!-- Dynamic generation via JS -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -188,28 +254,34 @@
         <!-- ==========================================
             TAB: CHECKLIST FORM (INPUT NEW / EDIT)
            ========================================== -->
-        <section id="tab-form" class="tab-content hidden max-w-4xl mx-auto">
+        <section id="tab-form" class="tab-content hidden max-w-4xl mx-auto space-y-6">
             <form id="audit-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                <!-- Date input -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
-                        <i data-lucide="calendar" class="w-5 h-5 text-emerald-600"></i>
-                        <h3 id="form-title" class="text-lg font-bold text-slate-800">วันเวลาที่ตรวจประเมิน</h3>
+                
+                <!-- Date input block -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                        <div class="bg-cyan-50 p-2 rounded-xl text-cyan-600">
+                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-800">ข้อมูลทั่วไปและวันเวลาที่ประเมิน</h3>
                     </div>
+                    
                     <div class="max-w-xs space-y-1.5">
-                        <label class="text-xs font-bold text-slate-500 uppercase">วันที่ทำการตรวจประเมิน</label>
-                        <input type="date" id="input-eval-date" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white" />
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase">วันที่ทำการตรวจประเมิน (audit_date)</label>
+                        <input type="date" id="input-eval-date" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white transition-all" />
                     </div>
                 </div>
 
                 <!-- Checklist Items Container -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-6">
                         <div class="flex items-center gap-3">
-                            <i data-lucide="clipboard-list" class="w-5 h-5 text-emerald-600"></i>
-                            <h3 class="text-lg font-bold text-slate-800">รายการตรวจสอบปฏิบัติการดูแลผู้ป่วย</h3>
+                            <div class="bg-teal-50 p-2 rounded-xl text-teal-600">
+                                <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-800">รายการตรวจสอบปฏิบัติการดูแลผู้ป่วย (check1 - check16)</h3>
                         </div>
-                        <span class="text-xs font-bold text-slate-400">ระบุสถานะรายข้อ</span>
+                        <span class="text-xs font-extrabold text-slate-400">ระบุสถานะรายข้อ</span>
                     </div>
 
                     <div id="form-questions-container" class="space-y-4">
@@ -218,9 +290,9 @@
                 </div>
 
                 <!-- General Comments -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-3">
-                    <label class="text-sm font-bold text-slate-700 block">บันทึกเพิ่มเติม / ข้อสังเกตเพิ่มเติมภาพรวม</label>
-                    <textarea id="input-general-notes" rows="3" placeholder="เช่น ตรวจพบสิ่งแวดล้อมไม่สะอาดบางจุด, ความร่วมมือของญาติอยู่ในเกณฑ์ดี..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"></textarea>
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 space-y-3">
+                    <label class="text-sm font-extrabold text-slate-700 block">บันทึกเพิ่มเติม / ข้อสังเกตเพิ่มเติมภาพรวม (generalNotes)</label>
+                    <textarea id="input-general-notes" rows="3" placeholder="ระบุสิ่งที่ตรวจพบเพิ่มเติม เช่น บุคลากรให้ความร่วมมือดี, จุดล้างมือชำรุด ฯลฯ" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white transition-all"></textarea>
                 </div>
 
                 <!-- Form Buttons -->
@@ -228,7 +300,7 @@
                     <button type="button" onclick="cancelForm()" class="px-6 py-2.5 bg-slate-200 hover:bg-slate-300 rounded-xl text-sm font-bold text-slate-600 transition-all">
                         ยกเลิก
                     </button>
-                    <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 px-8 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md transition-all">
+                    <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 px-8 py-2.5 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white rounded-xl text-sm font-extrabold shadow-lg transition-all transform active:scale-95 border border-white/10">
                         <i data-lucide="check-circle-2" class="w-4 h-4"></i> บันทึกข้อมูล
                     </button>
                 </div>
@@ -239,15 +311,10 @@
             TAB: AUDIT LOGS (HISTORY RECORDS LIST)
            ========================================== -->
         <section id="tab-list" class="tab-content hidden space-y-6">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="flex-1 max-w-md relative">
                     <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-slate-400"></i>
-                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาตามวันที่ (เช่น 2026-06) หรือบันทึกเพิ่มเติม..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white" />
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="handleExportCSV()" class="bg-teal-50 border border-teal-200 text-teal-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-teal-100">
-                        <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> ส่งออกข้อมูลเป็นไฟล์ CSV
-                    </button>
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาตามวันที่ หรือข้อความบันทึกเพิ่มเติม..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-cyan-400 focus:bg-white transition-all" />
                 </div>
             </div>
 
@@ -260,84 +327,199 @@
             TAB: SYNC CONFIG (GOOGLE SHEETS INTEGRATION)
            ========================================== -->
         <section id="tab-sync" class="tab-content hidden max-w-4xl mx-auto space-y-6">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-6">
+            <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
-                    <i data-lucide="file-spreadsheet" class="w-6 h-6 text-emerald-600"></i>
+                    <div class="bg-indigo-50 p-2.5 rounded-xl text-indigo-600">
+                        <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+                    </div>
                     <div>
-                        <h3 class="text-lg font-bold text-slate-800">การเชื่อมต่อชุดข้อมูลเข้า Google Sheets (MDRO_AUDIT)</h3>
-                        <p class="text-xs text-slate-400">สำหรับจัดเก็บ ตรวจสอบย้อนหลัง และสรุปแผนกต่าง ๆ ในองค์กร</p>
+                        <h3 class="text-lg font-extrabold text-slate-800">การเชื่อมต่อชุดข้อมูลเข้า Google Sheets (แผ่นงาน: AuditData)</h3>
+                        <p class="text-xs text-slate-400">จับคู่และปรับฟอร์แมตอัตโนมัติ สวยงาม เข้าใจง่าย ผ่าน Google Apps Script</p>
                     </div>
                 </div>
 
                 <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
-                    <h4 class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
-                        <i data-lucide="settings" class="w-4 h-4 text-emerald-600"></i> 1. ตั้งค่า Webhook URL
+                    <h4 class="text-sm font-extrabold text-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="settings" class="w-4 h-4 text-cyan-600"></i> 1. ตั้งค่า Webhook URL (Google Web App)
                     </h4>
                     <div class="space-y-3">
                         <div class="space-y-1.5">
-                            <label class="text-xs font-bold text-slate-500 uppercase">Google Apps Script Web App URL</label>
-                            <input type="url" id="webhook-url-input" oninput="saveWebhookSettings()" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-                            <p class="text-[11px] text-slate-400">หากท่านนำสคริปต์ไปติดตั้งใน Google Sheets ให้นำ URL ที่คัดลอกมาวางในช่องนี้</p>
+                            <label class="text-xs font-extrabold text-slate-500 uppercase">Google Apps Script Web App URL</label>
+                            <input type="url" id="webhook-url-input" oninput="saveWebhookSettings()" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
                         </div>
                         <div class="flex items-center gap-3">
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="auto-sync-checkbox" onchange="saveWebhookSettings()" class="sr-only peer">
-                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
                                 <span class="ml-3 text-xs font-bold text-slate-600">ซิงค์บันทึกขึ้น Google Sheet อัตโนมัติทันที</span>
                             </label>
                         </div>
                         <div class="flex gap-2 pt-2">
-                            <button onclick="syncAllToWebhook()" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm">
-                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin-hover"></i> ซิงค์ส่งชุดข้อมูลทั้งหมดขึ้น Google Sheet
-                            </button>
-                            <button onclick="testSyncConnection()" class="px-4 py-2 border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all">
-                                ส่งแถวทดสอบ
+                            <button onclick="syncAllToWebhook()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white rounded-xl text-xs font-extrabold transition-all shadow-md">
+                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> ซิงค์ส่งชุดข้อมูลทั้งหมดขึ้น Google Sheet
                             </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Instruction block containing the updated Apps Script code with beautiful auto formatting -->
                 <div class="space-y-4">
-                    <h4 class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
-                        <i data-lucide="info" class="w-4 h-4 text-emerald-600"></i> 2. โค้ด Google Apps Script (ฉบับประเมินรวดเร็ว)
+                    <h4 class="text-sm font-extrabold text-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="code" class="w-4 h-4 text-cyan-600"></i> 2. ซอร์สโค้ด Google Apps Script สำหรับแท็บแผ่นงาน `AuditData` (ปรับแต่งสีสันและฟอร์แมตภาษาไทยอัตโนมัติ)
                     </h4>
-                    <div class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
-                        <p>1. เข้าสู่ **Google Sheets** ของท่าน เมนู **ส่วนขยาย (Extensions)** &gt; **Apps Script**</p>
-                        <p>2. นำรหัสโค้ดที่ตัดฟิลด์ประชากรออกทั้งหมดตัวนี้ไปวางแทนที่ และกดบันทึก:</p>
-
-                        <div class="bg-slate-900 text-slate-200 p-4 rounded-xl font-mono text-[11px] overflow-x-auto relative">
-                            <pre id="apps-script-code">function doPost(e) {
+                    <p class="text-xs text-slate-550">นำรหัสโค้ดที่ได้รับการพัฒนาให้จัดรูปแบบสีสันและแสดงผลภาษาไทยอย่างเป็นระบบชุดนี้ ไปติดตั้งในเมนู **Extensions > Apps Script** เพื่อสร้างตารางแดชบอร์ดที่สมบูรณ์แบบบน Spreadsheet ของคุณ:</p>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-[11px] overflow-x-auto border border-slate-800 shadow-inner">
+                        <pre>function doPost(e) {
   try {
     var params = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("MDRO_AUDIT");
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName("AuditData");
     
+    var isNew = false;
     if (!sheet) {
-      sheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet("MDRO_AUDIT");
-      sheet.appendRow([
-        "วันที่บันทึกระบบ", "วันที่ประเมิน", "อัตราปฏิบัติถูกต้อง %", "รวมข้อปฏิบัติ", "รวมข้อไม่ปฏิบัติ", "รวมข้อไม่เกี่ยวข้อง", "หมายเหตุเพิ่มเติม"
-      ]);
+      sheet = ss.insertSheet("AuditData");
+      isNew = true;
     }
     
-    sheet.appendRow([
+    // ตั้งชื่อหัวคอลัมน์ภาษาไทยระบุตัวข้อชัดเจนเพื่อให้อ่านง่ายสไตล์ Dashboard
+    var headers = [
+      "วันเวลาบันทึก (Timestamp)", 
+      "วันที่ประเมิน (Audit Date)", 
+      "1. แจ้ง ICN ทันที", 
+      "2. แจ้งบุคลากรทราบ", 
+      "3. แยกผู้ป่วย/โซน", 
+      "4. ติดป้าย Contact precautions", 
+      "5. ไม่วางของบนเตียง", 
+      "6. แยกอุปกรณ์ของใช้", 
+      "7. เตรียม Alcohol gel", 
+      "8. ล้างมือด้วยน้ำยา 4% CHG", 
+      "9. สวม PPE (ถุงมือ/เสื้อคลุม/Mask)", 
+      "10. แยกผ้าและขยะติดเชื้อ", 
+      "11. ทำความสะอาดสิ่งแวดล้อม", 
+      "12. เคลื่อนย้ายแจ้งหน่วยงาน", 
+      "13. พนักงานเปลสวม PPE", 
+      "14. จำกัดบุคลากร/ผู้เฝ้าไข้", 
+      "15. แนะนำผู้ป่วยและญาติ", 
+      "16. ทำการเพาะเชื้อเพื่อยุติ", 
+      "ปฏิบัติ (YES)", 
+      "ไม่ปฏิบัติ (NO)", 
+      "อัตราปฏิบัติถูกต้อง (Compliance %)", 
+      "บันทึกเพิ่มเติมภาพรวม (generalNotes)"
+    ];
+    
+    if (isNew || sheet.getLastRow() === 0) {
+      sheet.appendRow(headers);
+      formatHeaderAndApplyRules(sheet);
+    }
+    
+    // แมปสถานะเป็นภาษาไทยเพื่อง่ายต่อการสรุปผลและดูสถิติ
+    function mapStatus(val) {
+      if (val === "yes") return "ปฏิบัติ";
+      if (val === "no") return "ไม่ปฏิบัติ";
+      return "ไม่เกี่ยวข้อง (N/A)";
+    }
+    
+    var rowData = [
       new Date(),
-      params.evalDate || "",
-      params.complianceRate || 0,
-      params.totalComplied || 0,
-      params.totalNotComplied || 0,
-      params.totalNA || 0,
+      params.audit_date || "",
+      mapStatus(params.check1),
+      mapStatus(params.check2),
+      mapStatus(params.check3),
+      mapStatus(params.check4),
+      mapStatus(params.check5),
+      mapStatus(params.check6),
+      mapStatus(params.check7),
+      mapStatus(params.check8),
+      mapStatus(params.check9),
+      mapStatus(params.check10),
+      mapStatus(params.check11),
+      mapStatus(params.check12),
+      mapStatus(params.check13),
+      mapStatus(params.check14),
+      mapStatus(params.check15),
+      mapStatus(params.check16),
+      params.score_yes || 0,
+      params.score_no || 0,
+      parseFloat(params.compliance_percent || 0) / 100, // ส่งเป็นค่าทศนิยมสำหรับจัดฟอร์แมต % ในชีต
       params.generalNotes || ""
-    ]);
+    ];
+    
+    sheet.appendRow(rowData);
+    
+    // ตั้งค่าฟอร์แมตตัวเลขคอลัมน์ % ให้เป็นสากลใน Google Sheet
+    var lastRow = sheet.getLastRow();
+    sheet.getRange(lastRow, 21).setNumberFormat("0.0%");
+    sheet.getRange(lastRow, 1, 1, sheet.getLastColumn()).setVerticalAlignment("middle");
     
     return ContentService.createTextOutput(JSON.stringify({result: "success"}))
       .setMimeType(ContentService.MimeType.JSON);
-      
   } catch(err) {
     return ContentService.createTextOutput(JSON.stringify({result: "error", error: err.toString()}))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+// ฟังก์ชันตกแต่งชีตและใช้กฎจัดกลุ่มเฉดสีอัตโนมัติ (Vibrant Cyan & Smart Status colors)
+function formatHeaderAndApplyRules(sheet) {
+  var headerRange = sheet.getRange(1, 1, 1, 22);
+  headerRange.setBackground("#0891b2") // โทนสีฟ้าครามสดใส (Cyan 600) ให้ความรู้สึกเป็นแอปการแพทย์สมัยใหม่
+             .setFontColor("#ffffff")
+             .setFontWeight("bold")
+             .setHorizontalAlignment("center")
+             .setVerticalAlignment("middle")
+             .setWrap(true);
+             
+  sheet.setRowHeight(1, 42);
+  sheet.setFrozenRows(1);
+  sheet.setFrozenColumns(2); // ตรึงคอลัมน์เวลาและวันที่ประเมิน
+  
+  // ปรับความกว้างของคอลัมน์ให้เหมาะกับขนาดคำอธิบายภาษาไทย
+  sheet.autoResizeColumns(1, 22);
+  
+  var rules = [];
+  
+  // กฎ 1: คำว่า "ปฏิบัติ" -> แสดงแถบสีเขียวอ่อนมีชีวิตชีวา
+  rules.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextEqualTo("ปฏิบัติ")
+    .setBackground("#d1fae5")
+    .setFontColor("#065f46")
+    .setRanges([sheet.getRange("C2:R1000")])
+    .build());
+    
+  // กฎ 2: คำว่า "ไม่ปฏิบัติ" -> แสดงแถบสีแดงอ่อนเพื่อส่งสัญญาณเฝ้าระวัง
+  rules.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextEqualTo("ไม่ปฏิบัติ")
+    .setBackground("#ffe4e6")
+    .setFontColor("#9f1239")
+    .setRanges([sheet.getRange("C2:R1000")])
+    .build());
+    
+  // กฎ 3: คำว่า "ไม่เกี่ยวข้อง (N/A)" -> ปรับเป็นเฉดสีเทาสะอาดตา
+  rules.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenTextEqualTo("ไม่เกี่ยวข้อง (N/A)")
+    .setBackground("#f1f5f9")
+    .setFontColor("#64748b")
+    .setRanges([sheet.getRange("C2:R1000")])
+    .build());
+    
+  // กฎ 4: คะแนนรวมอัตราการปฏิบัติต้องผ่านเกณฑ์ >= 80% เป็นสีเขียวเข้มเด่น
+  rules.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberGreaterThanOrEqualTo(0.8)
+    .setBackground("#d1fae5")
+    .setFontColor("#065f46")
+    .setRanges([sheet.getRange("U2:U1000")])
+    .build());
+    
+  // กฎ 5: คะแนนรวมต่ำกว่าเกณฑ์ < 50% เป็นสีแดงเน้นย้ำเพื่อให้ได้รับการแก้ด่วน
+  rules.push(SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberLessThan(0.5)
+    .setBackground("#ffe4e6")
+    .setFontColor("#9f1239")
+    .setRanges([sheet.getRange("U2:U1000")])
+    .build());
+    
+  sheet.setConditionalFormatRules(rules);
 }</pre>
-                        </div>
-                        <p>3. กดปุ่ม **การทำให้ใช้งานได้ (Deploy)** &gt; **เว็บแอปพลิเคชัน (Web app)** ตั้งค่าสิทธิ์เข้าถึงของทุกคน (Anyone) แล้วนำ URL มากรอกช่องด้านบนได้ทันที</p>
                     </div>
                 </div>
             </div>
@@ -348,8 +530,8 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-6 text-center border-t border-slate-800 text-xs">
         <div class="max-w-7xl mx-auto px-4 space-y-1">
-            <p>© 2026 โรงพยาบาลพุนพิน จังหวัดสุราษฎร์ธานี • ปรับปรุงล่าสุด 26 ตุลาคม 2567 (ครั้งที่ 4)</p>
-            <p class="text-slate-500 font-medium">
+            <p>© 2026 โรงพยาบาลพุนพิน จังหวัดสุราษฎร์ธานี • ระบบเวอร์ชันบันทึกประเมินด่วนแบบย่อ</p>
+            <p class="text-slate-550 font-medium">
                 อ้างอิงเกณฑ์การป้องกันควบคุมการติดเชื้อจากสถาบันบำราศนราดูร • แผนก ICN
             </p>
         </div>
@@ -378,67 +560,60 @@
             { id: 16, text: "ทำการเพาะเชื้อเพื่อยุติ contact precautions (พิจารณาเมื่อผลตรวจไม่พบเชื้อ อาการติดเชื้อหายไป)" }
         ];
 
-        // State variables
         let audits = [];
+        let filteredAudits = [];
         let editingId = null;
         let activeTab = 'dashboard';
         let searchQuery = '';
 
-        // Form answers in memory
         let formAnswers = {};
         let formNotes = {};
 
-        // On document load
         window.onload = function() {
-            // Initialize storage settings
             loadAuditsFromStorage();
             loadWebhookSettings();
-            
-            // Set current date to form input
             document.getElementById('input-eval-date').value = new Date().toISOString().split('T')[0];
-
-            // Initialize form states
             resetFormAnswers();
-            
-            // Build Dynamic UI items
             generateFormQuestions();
-            updateAppUI();
             
-            // Initial Lucide initialization
+            // Set Default dates inside custom range picker
+            document.getElementById('filter-start-date').value = new Date(Date.now() - 86400000 * 30).toISOString().split('T')[0];
+            document.getElementById('filter-end-date').value = new Date().toISOString().split('T')[0];
+            
+            applyFilters();
             lucide.createIcons();
         };
 
-        // Storage load
         function loadAuditsFromStorage() {
             const raw = localStorage.getItem('mdro_audits');
             if (raw) {
                 audits = JSON.parse(raw);
             } else {
-                // Pre-populate with realistic mock data to demonstrate dashboard beautifully on first load
+                // Populate realistic mock data to match the design (without ward, auditor, organism)
                 const mockData = [
                     {
                         id: "mock-1",
-                        evalDate: new Date(Date.now() - 86400000 * 2).toISOString().split('T')[0],
+                        evalDate: "2026-06-15",
                         checklist: {1:'yes', 2:'yes', 3:'yes', 4:'yes', 5:'no', 6:'yes', 7:'yes', 8:'yes', 9:'yes', 10:'yes', 11:'no', 12:'yes', 13:'yes', 14:'yes', 15:'yes', 16:'na'},
                         notes: {5: "พบขวดน้ำวางบนเตียง", 11: "ไม่ได้ทำความสะอาดช่วงเที่ยง"},
-                        generalNotes: "ภาพรวมดีมาก พยาบาลให้ความร่วมมือดี",
-                        complianceRate: 86.7,
-                        totalApplicable: 15,
-                        totalComplied: 13,
-                        totalNotComplied: 2,
-                        totalNA: 1
+                        generalNotes: "ภาพรวมดีมาก มีข้อบกพร่องเล็กน้อย",
+                        complianceRate: 86.7, totalApplicable: 15, totalComplied: 13, totalNotComplied: 2, totalNA: 1
                     },
                     {
                         id: "mock-2",
-                        evalDate: new Date(Date.now() - 86400000).toISOString().split('T')[0],
+                        evalDate: "2026-06-19",
                         checklist: {1:'yes', 2:'yes', 3:'yes', 4:'yes', 5:'yes', 6:'yes', 7:'yes', 8:'yes', 9:'yes', 10:'yes', 11:'yes', 12:'yes', 13:'yes', 14:'yes', 15:'yes', 16:'yes'},
                         notes: {},
                         generalNotes: "ยอดเยี่ยม ปฏิบัติถูกต้องครบ 100%",
-                        complianceRate: 100.0,
-                        totalApplicable: 16,
-                        totalComplied: 16,
-                        totalNotComplied: 0,
-                        totalNA: 0
+                        complianceRate: 100.0, totalApplicable: 16, totalComplied: 16, totalNotComplied: 0, totalNA: 0
+                    },
+                    {
+                        id: "mock-3",
+                        evalDate: "2025-04-12",
+                        checklist: {1:'yes', 2:'no', 3:'yes', 4:'no', 5:'no', 6:'yes', 7:'yes', 8:'no', 9:'yes', 10:'yes', 11:'no', 12:'yes', 13:'yes', 14:'yes', 15:'na', 16:'na'},
+                        notes: {},
+                        generalNotes: "ข้อมูลสถิติรอบปี 2568",
+                        complianceRate: 64.3, totalApplicable: 14, totalComplied: 9, totalNotComplied: 5, totalNA: 2
                     }
                 ];
                 audits = mockData;
@@ -449,6 +624,16 @@
         function saveAuditsToStorage() {
             localStorage.setItem('mdro_audits', JSON.stringify(audits));
             document.getElementById('count-badge').innerText = audits.length;
+        }
+
+        function clearAllData() {
+            if (confirm("คุณต้องการลบสถิติข้อมูลทั้งหมดใน LocalStorage บนเครื่องนี้ใช่หรือไม่? (ข้อมูลจะถูกรีเซ็ตใหม่)")) {
+                localStorage.removeItem('mdro_audits');
+                audits = [];
+                saveAuditsToStorage();
+                applyFilters();
+                showToast("ล้างข้อมูลเรียบร้อยแล้ว ระบบกลับสู่ค่าเริ่มต้น", "info");
+            }
         }
 
         function loadWebhookSettings() {
@@ -469,98 +654,105 @@
             formAnswers = {};
             formNotes = {};
             CHECKLIST_ITEMS.forEach(item => {
-                formAnswers[item.id] = 'yes'; // Default to "ปฏิบัติ"
+                formAnswers[item.id] = 'yes';
                 formNotes[item.id] = '';
             });
             document.getElementById('input-general-notes').value = '';
             document.getElementById('input-eval-date').value = new Date().toISOString().split('T')[0];
         }
 
-        // Switch tab mechanism
+        function toggleFilterInputs() {
+            const type = document.getElementById('filter-type').value;
+            document.getElementById('filter-year-container').classList.add('hidden');
+            document.getElementById('filter-start-container').classList.add('hidden');
+            document.getElementById('filter-end-container').classList.add('hidden');
+            
+            if (type === 'year') {
+                document.getElementById('filter-year-container').classList.remove('hidden');
+            } else if (type === 'range') {
+                document.getElementById('filter-start-container').classList.remove('hidden');
+                document.getElementById('filter-end-container').classList.remove('hidden');
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const type = document.getElementById('filter-type').value;
+            
+            if (type === 'all') {
+                filteredAudits = [...audits];
+            } else if (type === 'year') {
+                const selectedYear = document.getElementById('filter-year').value;
+                filteredAudits = audits.filter(a => a.evalDate.startsWith(selectedYear));
+            } else if (type === 'range') {
+                const start = document.getElementById('filter-start-date').value;
+                const end = document.getElementById('filter-end-date').value;
+                filteredAudits = audits.filter(a => {
+                    return (!start || a.evalDate >= start) && (!end || a.evalDate <= end);
+                });
+            }
+            
+            filteredAudits.sort((a,b) => new Date(b.evalDate) - new Date(a.evalDate));
+            updateAppUI();
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-type').value = 'all';
+            toggleFilterInputs();
+        }
+
         function switchTab(tabId) {
             activeTab = tabId;
-            document.querySelectorAll('.tab-content').forEach(section => {
-                section.classList.add('hidden');
-            });
+            document.querySelectorAll('.tab-content').forEach(section => section.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
 
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all text-emerald-100 hover:bg-white/10 hover:text-white";
+                btn.className = "tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all text-cyan-100 hover:bg-white/10 hover:text-white";
             });
-            document.getElementById('btn-tab-' + tabId).className = "tab-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all bg-white text-emerald-900 shadow-sm";
+            document.getElementById('btn-tab-' + tabId).className = "tab-btn flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg whitespace-nowrap transition-all bg-white text-cyan-950 shadow-md";
             
-            updateAppUI();
+            applyFilters();
             lucide.createIcons();
         }
 
-        // Custom UI notifications
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
             let bgClass = "bg-emerald-50 border-emerald-200 text-emerald-800";
             let icon = "check-circle-2";
-            if (type === 'error') {
-                bgClass = "bg-rose-50 border-rose-200 text-rose-800";
-                icon = "x-circle";
-            } else if (type === 'info') {
-                bgClass = "bg-sky-50 border-sky-200 text-sky-800";
-                icon = "info";
-            }
+            if (type === 'error') { bgClass = "bg-rose-50 border-rose-200 text-rose-800"; icon = "x-circle"; }
+            else if (type === 'info') { bgClass = "bg-sky-50 border-sky-200 text-sky-800"; icon = "info"; }
 
             toast.className = `p-4 rounded-xl shadow-lg border flex items-center gap-3 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto ${bgClass}`;
-            toast.innerHTML = `
-                <i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i>
-                <p class="font-semibold text-sm">${message}</p>
-            `;
+            toast.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i><p class="font-semibold text-sm">${message}</p>`;
             container.appendChild(toast);
             lucide.createIcons();
-
-            // Trigger animation frame
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 50);
-
-            // Hide and remove
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 50);
             setTimeout(() => {
                 toast.classList.add('translate-y-2', 'opacity-0');
                 setTimeout(() => toast.remove(), 300);
             }, 4000);
         }
 
-        // Dynamic element generators
         function generateFormQuestions() {
             const container = document.getElementById('form-questions-container');
             container.innerHTML = '';
-
             CHECKLIST_ITEMS.forEach(item => {
                 const questionDiv = document.createElement('div');
-                questionDiv.className = "p-4 rounded-2xl bg-slate-50/55 border border-slate-100/80 space-y-3";
+                questionDiv.className = "p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3 hover:border-cyan-100 transition-all";
                 questionDiv.innerHTML = `
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-3">
                         <div class="flex gap-3">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center justify-center mt-0.5 font-mono">
-                                ${item.id}
-                            </span>
-                            <span class="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
-                                ${item.text}
-                            </span>
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400 to-teal-400 text-white text-xs font-bold flex items-center justify-center mt-0.5 font-mono shadow-sm">${item.id}</span>
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-700 leading-relaxed">${item.text}</span>
                         </div>
                         <div class="flex bg-slate-100 p-1 rounded-xl flex-shrink-0 self-end md:self-auto">
-                            <button type="button" onclick="setAnswer(${item.id}, 'yes')" id="btn-yes-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 bg-emerald-500 text-white shadow-sm">
-                                <i data-lucide="check" class="w-3.5 h-3.5"></i> ปฏิบัติ
-                            </button>
-                            <button type="button" onclick="setAnswer(${item.id}, 'no')" id="btn-no-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800">
-                                <i data-lucide="x-circle" class="w-3.5 h-3.5"></i> ไม่ปฏิบัติ
-                            </button>
-                            <button type="button" onclick="setAnswer(${item.id}, 'na')" id="btn-na-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800">
-                                <i data-lucide="minus-circle" class="w-3.5 h-3.5"></i> N/A
-                            </button>
+                            <button type="button" onclick="setAnswer(${item.id}, 'yes')" id="btn-yes-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-emerald-500 text-white shadow-sm"><i data-lucide="check" class="w-3.5 h-3.5"></i> ปฏิบัติ</button>
+                            <button type="button" onclick="setAnswer(${item.id}, 'no')" id="btn-no-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800"><i data-lucide="x-circle" class="w-3.5 h-3.5"></i> ไม่ปฏิบัติ</button>
+                            <button type="button" onclick="setAnswer(${item.id}, 'na')" id="btn-na-${item.id}" class="choice-btn-${item.id} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800"><i data-lucide="minus-circle" class="w-3.5 h-3.5"></i> N/A</button>
                         </div>
                     </div>
-                    <div class="pl-9">
-                        <input type="text" oninput="setNote(${item.id}, this.value)" id="note-${item.id}" placeholder="ระบุคำอธิบาย/หมายเหตุเฉพาะข้อนี้ (ถ้ามี)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-                    </div>
+                    <div class="pl-9"><input type="text" oninput="setNote(${item.id}, this.value)" id="note-${item.id}" placeholder="ระบุคำอธิบายเฉพาะข้อนี้ (ถ้ามี)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all" /></div>
                 `;
                 container.appendChild(questionDiv);
             });
@@ -568,54 +760,35 @@
 
         function setAnswer(itemId, val) {
             formAnswers[itemId] = val;
-            
-            // Reset button classes
-            document.querySelectorAll(`.choice-btn-${itemId}`).forEach(btn => {
-                btn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 text-slate-500 hover:text-slate-800`;
-            });
-
+            document.querySelectorAll(`.choice-btn-${itemId}`).forEach(btn => btn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all text-slate-500 hover:text-slate-800 flex items-center gap-1`);
             const activeBtn = document.getElementById(`btn-${val}-${itemId}`);
-            if (val === 'yes') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 bg-emerald-500 text-white shadow-sm`;
-            if (val === 'no') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 bg-rose-500 text-white shadow-sm`;
-            if (val === 'na') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-extrabold rounded-lg transition-all flex items-center gap-1 bg-slate-400 text-white shadow-sm`;
+            if (val === 'yes') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-emerald-500 text-white shadow-sm`;
+            if (val === 'no') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-rose-500 text-white shadow-sm`;
+            if (val === 'na') activeBtn.className = `choice-btn-${itemId} px-3 py-1 text-xs font-black rounded-lg transition-all flex items-center gap-1 bg-slate-400 text-white shadow-sm`;
             lucide.createIcons();
         }
 
-        function setNote(itemId, val) {
-            formNotes[itemId] = val;
-        }
+        function setNote(itemId, val) { formNotes[itemId] = val; }
 
-        // Form operations
         function openNewAuditForm() {
             editingId = null;
             document.getElementById('form-tab-text').innerText = 'บันทึกประเมินใหม่';
-            document.getElementById('form-title').innerText = 'วันเวลาที่ตรวจประเมิน';
             resetFormAnswers();
-            
-            // reset UI state choices to 'yes'
             CHECKLIST_ITEMS.forEach(item => {
                 setAnswer(item.id, 'yes');
                 document.getElementById(`note-${item.id}`).value = '';
             });
-
             switchTab('form');
         }
 
-        function cancelForm() {
-            resetFormAnswers();
-            switchTab('dashboard');
-        }
+        function cancelForm() { resetFormAnswers(); switchTab('dashboard'); }
 
-        function handleFormSubmit(e) {
+        async function handleFormSubmit(e) {
             e.preventDefault();
             const evalDate = document.getElementById('input-eval-date').value;
             const generalNotes = document.getElementById('input-general-notes').value;
 
-            // Calculations
-            let complied = 0;
-            let notComplied = 0;
-            let na = 0;
-
+            let complied = 0, notComplied = 0, na = 0;
             Object.values(formAnswers).forEach(ans => {
                 if (ans === 'yes') complied++;
                 else if (ans === 'no') notComplied++;
@@ -638,7 +811,6 @@
             };
 
             if (editingId) {
-                // Update
                 const index = audits.findIndex(a => a.id === editingId);
                 if (index !== -1) {
                     audits[index] = { ...audits[index], ...payload };
@@ -646,21 +818,42 @@
                 }
                 editingId = null;
             } else {
-                // Create
                 payload.id = 'audit_' + Date.now();
                 audits.unshift(payload);
                 showToast("บันทึกข้อมูลการประเมินสำเร็จ");
             }
 
             saveAuditsToStorage();
-            
-            // Webhook trigger if enabled
+
+            // Auto sync webhook to target sheet AuditData
             const webhookUrl = localStorage.getItem('mdro_webhook_url');
             const autoSync = localStorage.getItem('mdro_auto_sync') === 'true';
             if (webhookUrl && autoSync) {
-                triggerWebhook(payload);
+                const syncPayload = {
+                    audit_date: payload.evalDate,
+                    score_yes: payload.totalComplied,
+                    score_no: payload.totalNotComplied,
+                    compliance_percent: payload.complianceRate,
+                    generalNotes: payload.generalNotes
+                };
+                CHECKLIST_ITEMS.forEach(item => {
+                    syncPayload[`check${item.id}`] = payload.checklist[item.id] || "na";
+                });
+
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'no-cors',
+                        body: JSON.stringify(syncPayload)
+                    });
+                    showToast("ซิงค์เข้าระบบ Google Sheets (AuditData) เรียบร้อย!");
+                } catch (err) {
+                    console.error("Sync error:", err);
+                }
             }
 
+            resetFilters(); 
             resetFormAnswers();
             switchTab('dashboard');
         }
@@ -668,152 +861,66 @@
         function handleEdit(id) {
             const audit = audits.find(a => a.id === id);
             if (!audit) return;
-
             editingId = id;
             document.getElementById('form-tab-text').innerText = 'แก้ไขการประเมิน';
-            document.getElementById('form-title').innerText = 'แก้ไขรอบบันทึกการประเมิน';
-            
             document.getElementById('input-eval-date').value = audit.evalDate;
             document.getElementById('input-general-notes').value = audit.generalNotes || '';
-
-            // Map data back to forms state
             CHECKLIST_ITEMS.forEach(item => {
                 const ans = audit.checklist[item.id] || 'yes';
                 const note = audit.notes[item.id] || '';
-                
                 setAnswer(item.id, ans);
                 document.getElementById(`note-${item.id}`).value = note;
                 formNotes[item.id] = note;
             });
-
             switchTab('form');
         }
 
         function handleDelete(id) {
-            if (confirm("คุณแน่ใจหรือไม่ว่าต้องการลบแบบบันทึกการประเมินนี้จากเครื่องของคุณ?")) {
+            if (confirm("ลบแบบประเมินนี้รอบนี้?")) {
                 audits = audits.filter(a => a.id !== id);
                 saveAuditsToStorage();
-                showToast("ลบข้อมูลแบบประเมินเรียบร้อยแล้ว", "info");
-                updateAppUI();
+                showToast("ลบข้อมูลเรียบร้อย", "info");
+                applyFilters();
             }
         }
 
-        // Webhook Trigger
-        async function triggerWebhook(record) {
-            const webhookUrl = localStorage.getItem('mdro_webhook_url');
-            if (!webhookUrl) return;
-
-            try {
-                await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    mode: 'no-cors',
-                    body: JSON.stringify(record)
-                });
-                showToast("ซิงค์ข้อมูลกับ Google Sheet สำเร็จ!");
-            } catch (err) {
-                console.error("Webhook error:", err);
-                showToast("เกิดข้อผิดพลาดในการซิงค์ข้อมูล", "error");
-            }
-        }
-
-        async function testSyncConnection() {
-            const webhookUrl = document.getElementById('webhook-url-input').value;
-            if (!webhookUrl) {
-                showToast("กรุณาระบุ Webhook URL ก่อนการทดสอบ", "error");
-                return;
-            }
-            showToast("กำลังส่งแถวทดสอบ...", "info");
-            
-            const mockRecord = {
-                evalDate: new Date().toISOString().split('T')[0],
-                complianceRate: 100,
-                totalComplied: 16,
-                totalNotComplied: 0,
-                totalNA: 0,
-                generalNotes: "ระบบประเมิน: เชื่อมต่อทดสอบสำเร็จ!"
-            };
-
-            await triggerWebhook(mockRecord);
-        }
-
-        async function syncAllToWebhook() {
-            const webhookUrl = document.getElementById('webhook-url-input').value;
-            if (!webhookUrl) {
-                showToast("กรุณาระบุ Webhook URL ก่อนการเชื่อมต่อ", "error");
-                return;
-            }
-            if (audits.length === 0) {
-                showToast("ไม่มีข้อมูลในระบบให้อัปโหลด", "error");
-                return;
-            }
-
-            showToast("กำลังส่งออกแบบ Bulk เข้าสู่ Google Sheet...", "info");
-            let successCount = 0;
-
-            for (const audit of audits) {
-                try {
-                    await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        mode: 'no-cors',
-                        body: JSON.stringify(audit)
-                    });
-                    successCount++;
-                } catch (e) {
-                    console.error("Bulk sync error item:", e);
-                }
-            }
-            showToast(`ซิงค์ข้อมูลเรียบร้อย (${successCount}/${audits.length} รายการ)`);
-        }
-
-        // Dynamic State UI Updates
         function updateAppUI() {
-            // Count indicators
             document.getElementById('count-badge').innerText = audits.length;
-
-            if (activeTab === 'dashboard') {
-                renderDashboard();
-            } else if (activeTab === 'list') {
-                renderLogs();
-            }
+            if (activeTab === 'dashboard') renderDashboard();
+            else if (activeTab === 'list') renderLogs();
         }
 
-        // Dashboard Calculations & Render
         function renderDashboard() {
-            const filtered = audits; // No advanced ward/pathogen filters needed
-            document.getElementById('dash-summary-count').innerText = `วิเคราะห์ผลประเมินจากทั้งหมด ${filtered.length} รายการ`;
+            const totalCount = filteredAudits.length;
+            document.getElementById('dash-summary-count').innerText = `วิเคราะห์ผลตามตัวกรองสำเร็จ: ทั้งหมด ${totalCount} รายการ`;
             
-            if (filtered.length === 0) {
-                // Empty state calculations
-                updateGauge(0);
-                document.getElementById('dash-compliance-text').innerText = "0%";
+            if (totalCount === 0) {
                 document.getElementById('dash-total-audits').innerText = "0";
-                document.getElementById('dash-passed-count').innerText = "0 รายการ";
-                document.getElementById('dash-failed-count').innerText = "0 รายการ";
-                document.getElementById('dash-perfect-percent').innerText = "0%";
-                document.getElementById('dash-perfect-bar').style.width = "0%";
-                document.getElementById('dash-poor-percent').innerText = "0%";
-                document.getElementById('dash-poor-bar').style.width = "0%";
+                document.getElementById('dash-perfect-count').innerText = "0 ครั้ง";
+                document.getElementById('dash-poor-count').innerText = "0 ครั้ง";
+                document.getElementById('top-failed-container').innerHTML = '<div class="text-xs text-slate-400 p-2">ไม่มีข้อมูลปัญหา</div>';
+                
+                // Reset Charts
+                document.getElementById('image-bar-chart-container').innerHTML = `
+                    <div class="text-center py-12 text-slate-400 text-sm font-semibold">
+                        ไม่มีข้อมูลผลการปฏิบัติรายข้อสำหรับการกรองนี้
+                    </div>`;
+                document.getElementById('trend-chart-container').innerHTML = `
+                    <div class="text-center py-8 text-slate-300 text-xs font-semibold">
+                        ไม่มีข้อมูลแนวโน้ม
+                    </div>`;
                 renderItemStatsEmpty();
                 return;
             }
 
-            let grandComplied = 0;
-            let grandApplicable = 0;
+            let grandComplied = 0, grandApplicable = 0;
+            let passedCount = 0, failedCount = 0;
+            let perfectCount = 0, poorCount = 0;
 
-            let passedCount = 0;
-            let failedCount = 0;
-            let perfectCount = 0;
-            let poorCount = 0;
-
-            // Create checklist item counts
             const itemCounts = {};
-            CHECKLIST_ITEMS.forEach(i => {
-                itemCounts[i.id] = { yes: 0, no: 0, na: 0 };
-            });
+            CHECKLIST_ITEMS.forEach(i => itemCounts[i.id] = { yes: 0, no: 0, na: 0 });
 
-            filtered.forEach(a => {
+            filteredAudits.forEach(a => {
                 grandComplied += (a.totalComplied || 0);
                 grandApplicable += ((a.totalComplied || 0) + (a.totalNotComplied || 0));
 
@@ -823,7 +930,6 @@
                 if (a.complianceRate === 100) perfectCount++;
                 if (a.complianceRate < 50) poorCount++;
 
-                // Per-item counting
                 CHECKLIST_ITEMS.forEach(item => {
                     const status = a.checklist[item.id] || 'na';
                     if (status === 'yes') itemCounts[item.id].yes++;
@@ -832,32 +938,172 @@
                 });
             });
 
-            const overallCompliance = grandApplicable > 0 ? Math.round((grandComplied / grandApplicable) * 100) : 0;
-            
-            // Update Dashboard Cards text
-            updateGauge(overallCompliance);
-            document.getElementById('dash-compliance-text').innerText = `${overallCompliance}%`;
-            document.getElementById('dash-total-audits').innerText = filtered.length;
-            document.getElementById('dash-passed-count').innerText = `${passedCount} รายการ`;
-            document.getElementById('dash-failed-count').innerText = `${failedCount} รายการ`;
+            document.getElementById('dash-total-audits').innerText = totalCount;
+            document.getElementById('dash-perfect-count').innerText = `${perfectCount} ครั้ง`;
+            document.getElementById('dash-poor-count').innerText = `${poorCount} ครั้ง`;
 
-            const perfectPct = Math.round((perfectCount / filtered.length) * 100);
-            const poorPct = Math.round((poorCount / filtered.length) * 100);
-
-            document.getElementById('dash-perfect-percent').innerText = `${perfectPct}%`;
-            document.getElementById('dash-perfect-bar').style.width = `${perfectPct}%`;
-            document.getElementById('dash-poor-percent').innerText = `${poorPct}%`;
-            document.getElementById('dash-poor-bar').style.width = `${poorPct}%`;
-
-            // Render 16 Items statistics
+            renderTopProblems(itemCounts);
+            renderHorizontalBarChart(itemCounts);
+            renderTrendLineChart();
             renderItemStats(itemCounts);
         }
 
-        function updateGauge(percent) {
-            const circle = document.getElementById('gauge-circle');
-            const circumference = 376.9; // 2 * pi * r (60)
-            const offset = circumference - (circumference * percent) / 100;
-            circle.style.strokeDashoffset = offset;
+        function renderTrendLineChart() {
+            const container = document.getElementById('trend-chart-container');
+            if (!container) return;
+
+            const timelineData = [...filteredAudits].slice(0, 10).reverse();
+            if (timelineData.length === 0) {
+                container.innerHTML = '<div class="text-xs text-slate-400 w-full text-center py-8">ไม่มีข้อมูลแนวโน้ม</div>';
+                return;
+            }
+
+            const width = 500;
+            const height = 120;
+            const paddingX = 40;
+            const paddingY = 20;
+
+            let points = [];
+            const stepX = timelineData.length > 1 ? (width - paddingX * 2) / (timelineData.length - 1) : 0;
+
+            timelineData.forEach((audit, index) => {
+                const x = timelineData.length > 1 ? paddingX + (index * stepX) : width / 2;
+                const y = height - paddingY - ((audit.complianceRate / 100) * (height - paddingY * 2));
+                points.push({ x, y, rate: audit.complianceRate, date: audit.evalDate });
+            });
+
+            let pathD = '';
+            let areaD = '';
+            if (points.length > 1) {
+                pathD = `M ${points[0].x} ${points[0].y} ` + points.slice(1).map(p => `L ${p.x} ${p.y}`).join(' ');
+                areaD = `${pathD} L ${points[points.length - 1].x} ${height - paddingY} L ${points[0].x} ${height - paddingY} Z`;
+            }
+
+            let svgContent = `
+                <svg viewBox="0 0 ${width} ${height}" class="w-full h-full overflow-visible">
+                    <defs>
+                        <!-- Vivid gradient for chart glowing background -->
+                        <linearGradient id="trend-gradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.4"/>
+                            <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Guide Grid Lines -->
+                    <line x1="${paddingX}" y1="${paddingY}" x2="${width - paddingX}" y2="${paddingY}" stroke="#e2e8f0" stroke-width="1" />
+                    <text x="${paddingX - 10}" y="${paddingY + 4}" class="text-[9px] font-black fill-slate-400" text-anchor="end">100%</text>
+
+                    <line x1="${paddingX}" y1="${paddingY + (height - paddingY * 2) * 0.2}" x2="${width - paddingX}" y2="${paddingY + (height - paddingY * 2) * 0.2}" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2 2" />
+                    <text x="${paddingX - 10}" y="${paddingY + (height - paddingY * 2) * 0.2 + 4}" class="text-[9px] font-bold fill-cyan-500" text-anchor="end">80%</text>
+
+                    <line x1="${paddingX}" y1="${height / 2}" x2="${width - paddingX}" y2="${height / 2}" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2 2" />
+                    <text x="${paddingX - 10}" y="${height / 2 + 4}" class="text-[9px] font-bold fill-indigo-400" text-anchor="end">50%</text>
+
+                    <line x1="${paddingX}" y1="${height - paddingY}" x2="${width - paddingX}" y2="${height - paddingY}" stroke="#cbd5e1" stroke-width="1.5" />
+                    <text x="${paddingX - 10}" y="${height - paddingY + 4}" class="text-[9px] font-black fill-slate-500" text-anchor="end">0%</text>
+            `;
+
+            if (points.length > 1) {
+                svgContent += `<path d="${areaD}" fill="url(#trend-gradient)" />`;
+                svgContent += `<path d="${pathD}" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />`;
+            }
+
+            // Interactive Circles with bright glowing states
+            points.forEach((p, idx) => {
+                const circleColor = p.rate >= 80 ? '#10b981' : p.rate >= 50 ? '#f59e0b' : '#ef4444';
+                svgContent += `
+                    <g class="group/dot cursor-pointer">
+                        <circle cx="${p.x}" cy="${p.y}" r="12" fill="transparent" />
+                        <circle cx="${p.x}" cy="${p.y}" r="5" fill="#ffffff" stroke="${circleColor}" stroke-width="3" class="transition-all duration-200 group-hover/dot:r-7" />
+                        <g class="opacity-0 group-hover/dot:opacity-100 pointer-events-none transition-opacity duration-200">
+                            <rect x="${p.x - 50}" y="${p.y - 35}" width="100" height="24" rx="6" fill="#0f172a" />
+                            <text x="${p.x}" y="${p.y - 20}" fill="#38bdf8" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">
+                                ${p.date}: ${p.rate}%
+                            </text>
+                        </g>
+                    </g>
+                `;
+            });
+
+            svgContent += `</svg>`;
+            container.innerHTML = svgContent;
+        }
+
+        function renderHorizontalBarChart(itemCounts) {
+            const container = document.getElementById('image-bar-chart-container');
+            container.innerHTML = '';
+
+            CHECKLIST_ITEMS.forEach(item => {
+                const stats = itemCounts[item.id];
+                const totalApplicable = stats.yes + stats.no;
+                const yesPercent = totalApplicable > 0 ? Math.round((stats.yes / totalApplicable) * 100) : 0;
+
+                const row = document.createElement('div');
+                row.className = "flex items-center group relative h-8";
+                row.innerHTML = `
+                    <!-- Row label (e.g. ข้อ 1, ข้อ 2) -->
+                    <div class="absolute -left-16 w-14 text-right text-xs sm:text-sm font-bold text-slate-600 select-none font-sans">
+                        ข้อ ${item.id}
+                    </div>
+                    
+                    <!-- Horizontal Bar Outer wrapper -->
+                    <div class="flex-1 bg-slate-100 h-7 rounded-lg overflow-hidden flex items-center relative group-hover:bg-slate-200/60 transition-colors">
+                        
+                        <!-- Beautiful Vibrant Cyan to Indigo Gradient Bar -->
+                        <div class="bg-gradient-to-r from-cyan-400 to-indigo-500 hover:from-cyan-500 hover:to-indigo-600 h-full rounded-lg transition-all duration-1000 flex items-center justify-end px-3 shadow-inner" style="width: ${yesPercent}%">
+                            <!-- Inside label shown when width allows -->
+                            ${yesPercent >= 12 ? `<span class="text-[10px] sm:text-xs text-white font-black font-mono drop-shadow-sm">${yesPercent}%</span>` : ''}
+                        </div>
+                        
+                        <!-- Outside label shown if the bar is too small -->
+                        ${yesPercent < 12 ? `<span class="text-[10px] sm:text-xs text-cyan-600 font-black font-mono pl-2">${yesPercent}%</span>` : ''}
+
+                        <!-- Realtime Info Tooltip on hover -->
+                        <span class="absolute left-3 text-[10px] text-slate-700 pointer-events-none truncate pr-16 opacity-0 group-hover:opacity-100 transition-opacity font-bold hidden md:block">
+                            ${item.text} | ปฏิบัติ: ${stats.yes} ครั้ง, ไม่ปฏิบัติ: ${stats.no} ครั้ง
+                        </span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function renderTopProblems(itemCounts) {
+            const container = document.getElementById('top-failed-container');
+            container.innerHTML = '';
+
+            const arrays = CHECKLIST_ITEMS.map(item => {
+                return {
+                    id: item.id,
+                    text: item.text,
+                    noCount: itemCounts[item.id].no
+                };
+            });
+
+            const sortedProblems = arrays.filter(p => p.noCount > 0).sort((a,b) => b.noCount - a.noCount).slice(0, 5);
+
+            if (sortedProblems.length === 0) {
+                container.innerHTML = `
+                    <div class="p-4 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-2xl border border-emerald-100 flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> ยอดเยี่ยม! ไม่พบข้อปฏิบัติที่ผิดพลาดในตัวกรองนี้
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            sortedProblems.forEach((prob, idx) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "p-3 bg-rose-50 border border-rose-100 rounded-xl flex items-start gap-2.5 shadow-sm";
+                itemDiv.innerHTML = `
+                    <span class="w-5 h-5 bg-gradient-to-br from-rose-400 to-pink-500 text-white rounded-full text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">${idx + 1}</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-extrabold text-slate-700 truncate">ข้อ ${prob.id}: ${prob.text}</p>
+                        <p class="text-[10px] font-black text-rose-500 mt-0.5">พบการไม่ปฏิบัติ: ${prob.noCount} รอบ</p>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
         }
 
         function renderItemStatsEmpty() {
@@ -865,23 +1111,17 @@
             container.innerHTML = '';
             CHECKLIST_ITEMS.forEach(item => {
                 const row = document.createElement('div');
-                row.className = "grid grid-cols-1 lg:grid-cols-12 gap-3 items-center border-b border-slate-50 pb-4 last:border-0 last:pb-0";
+                row.className = "grid grid-cols-1 md:grid-cols-12 gap-2 items-center border-b border-slate-50 pb-2.5 text-xs";
                 row.innerHTML = `
-                    <div class="lg:col-span-5 flex gap-2.5 items-start">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center font-mono">${item.id}</span>
-                        <p class="text-xs md:text-sm text-slate-700 font-medium leading-relaxed">${item.text}</p>
+                    <div class="md:col-span-6 flex gap-2 items-start">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-600 font-bold flex items-center justify-center font-mono text-[10px]">${item.id}</span>
+                        <p class="text-slate-700 font-medium truncate">${item.text}</p>
                     </div>
-                    <div class="lg:col-span-2 text-xs font-bold text-slate-500 flex justify-between lg:justify-center gap-4">
-                        <span>ปฏิบัติ: <span class="text-emerald-600">0 รอบ</span></span>
-                        <span>ไม่ปฏิบัติ: <span class="text-rose-600">0 รอบ</span></span>
-                    </div>
-                    <div class="lg:col-span-4 flex items-center gap-3">
-                        <div class="flex-1 bg-slate-100 h-3 rounded-full overflow-hidden flex">
-                            <div class="bg-slate-200 w-full h-full text-[10px] text-center leading-none text-slate-400 font-bold flex items-center justify-center">ยังไม่มีข้อมูล</div>
+                    <div class="md:col-span-6 flex items-center gap-2">
+                        <div class="flex-1 bg-slate-100 h-2.5 rounded-full flex overflow-hidden">
+                            <div class="w-full text-center text-[9px] text-slate-300">ไม่มีข้อมูลตามคำกรอง</div>
                         </div>
-                        <span class="text-xs font-extrabold text-slate-700 w-10 text-right">-</span>
                     </div>
-                    <div class="lg:col-span-1 text-right text-[11px] text-slate-400 font-medium">N/A: 0 ครั้ง</div>
                 `;
                 container.appendChild(row);
             });
@@ -898,101 +1138,80 @@
                 const noPercent = totalApplicable > 0 ? Math.round((stats.no / totalApplicable) * 100) : 0;
 
                 const row = document.createElement('div');
-                row.className = "grid grid-cols-1 lg:grid-cols-12 gap-3 items-center border-b border-slate-50 pb-4 last:border-0 last:pb-0";
+                row.className = "grid grid-cols-1 md:grid-cols-12 gap-2 items-center border-b border-slate-50 pb-2.5 text-xs hover:bg-slate-50 rounded-lg p-1 transition-colors";
                 row.innerHTML = `
-                    <div class="lg:col-span-5 flex gap-2.5 items-start">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center font-mono">${item.id}</span>
-                        <p class="text-xs md:text-sm text-slate-700 font-medium leading-relaxed">${item.text}</p>
+                    <div class="md:col-span-6 flex gap-2 items-start" title="${item.text}">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-50 text-cyan-700 font-black flex items-center justify-center font-mono text-[10px]">${item.id}</span>
+                        <p class="text-slate-700 font-extrabold truncate md:whitespace-normal md:line-clamp-1">${item.text}</p>
                     </div>
-                    <div class="lg:col-span-2 text-xs font-bold text-slate-500 flex justify-between lg:justify-center gap-4">
-                        <span>ปฏิบัติ: <span class="text-emerald-600 font-mono">${stats.yes} รอบ</span></span>
-                        <span>ไม่ปฏิบัติ: <span class="text-rose-600 font-mono">${stats.no} รอบ</span></span>
+                    <div class="md:col-span-3 text-[10px] font-extrabold text-slate-500 flex justify-between md:justify-around">
+                        <span>ปฏิบัติ: <span class="text-emerald-600 font-mono">${stats.yes}</span></span>
+                        <span>ไม่ทำ: <span class="text-rose-500 font-mono">${stats.no}</span></span>
+                        <span>N/A: <span class="text-slate-400 font-mono">${stats.na}</span></span>
                     </div>
-                    <div class="lg:col-span-4 flex items-center gap-3">
-                        <div class="flex-1 bg-slate-100 h-3 rounded-full overflow-hidden flex">
+                    <div class="md:col-span-3 flex items-center gap-2">
+                        <div class="flex-1 bg-slate-100 h-2.5 rounded-full overflow-hidden flex">
                             ${totalApplicable > 0 ? `
-                                <div class="bg-emerald-500 h-full transition-all duration-1000" style="width: ${yesPercent}%"></div>
-                                <div class="bg-rose-400 h-full transition-all duration-1000" style="width: ${noPercent}%"></div>
+                                <div class="bg-gradient-to-r from-emerald-400 to-teal-500 h-full" style="width: ${yesPercent}%"></div>
+                                <div class="bg-rose-400 h-full" style="width: ${noPercent}%"></div>
                             ` : `
-                                <div class="bg-slate-200 w-full h-full text-[10px] text-center leading-none text-slate-400 font-bold flex items-center justify-center">ไม่เกี่ยวข้อง (N/A) ทั้งหมด</div>
+                                <div class="bg-slate-200 w-full h-full text-[9px] text-center text-slate-400">N/A</div>
                             `}
                         </div>
-                        <span class="text-xs font-extrabold text-slate-700 w-10 text-right font-mono">
+                        <span class="text-[10px] font-black text-slate-700 w-8 text-right font-mono">
                             ${totalApplicable > 0 ? `${yesPercent}%` : '-'}
                         </span>
                     </div>
-                    <div class="lg:col-span-1 text-right text-[11px] text-slate-400 font-medium">N/A: <span class="font-mono">${stats.na}</span> ครั้ง</div>
                 `;
                 container.appendChild(row);
             });
         }
 
-        // Render logs list
         function renderLogs() {
             const container = document.getElementById('logs-container');
             container.innerHTML = '';
-
             const query = searchQuery.trim().toLowerCase();
-            const filtered = audits.filter(a => {
+            
+            const searched = filteredAudits.filter(a => {
                 return (
-                    a.evalDate.includes(query) ||
-                    (a.generalNotes && a.generalNotes.toLowerCase().includes(query)) ||
-                    a.id.toLowerCase().includes(query)
+                    a.evalDate.includes(query) || 
+                    (a.generalNotes && a.generalNotes.toLowerCase().includes(query))
                 );
             });
 
-            if (filtered.length === 0) {
+            if (searched.length === 0) {
                 container.innerHTML = `
-                    <div class="bg-white p-12 text-center rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center justify-center">
-                        <i data-lucide="clipboard-list" class="w-12 h-12 text-slate-300 mb-3"></i>
-                        <p class="text-slate-500 font-bold">ไม่พบประวัติผลการประเมินที่ค้นหา</p>
-                        <p class="text-slate-400 text-xs mt-1">กรุณาลองเปลี่ยนคำค้นหา หรือกรอกประเมินรอบใหม่เข้าสู่ระบบ</p>
+                    <div class="bg-white p-8 text-center rounded-3xl shadow-md border border-slate-100 flex flex-col items-center justify-center">
+                        <i data-lucide="clipboard-list" class="w-10 h-10 text-slate-300 mb-2"></i>
+                        <p class="text-slate-500 font-bold text-sm">ไม่พบประวัติผลการประเมินที่ค้นหา</p>
                     </div>
                 `;
                 lucide.createIcons();
                 return;
             }
 
-            filtered.forEach((audit, index) => {
-                const scoreColor = audit.complianceRate >= 80 
-                    ? 'text-emerald-600 border-emerald-100 bg-emerald-50/50' 
-                    : 'text-amber-600 border-amber-100 bg-amber-50/50';
-
+            searched.forEach((audit, index) => {
+                const scoreColor = audit.complianceRate >= 80 ? 'text-emerald-600 border-emerald-200 bg-emerald-50/70' : 'text-amber-600 border-amber-200 bg-amber-50/70';
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-3xl p-5 shadow-sm border border-slate-100/80 hover:shadow-md transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-5";
+                card.className = "bg-white rounded-3xl p-5 shadow-md border border-slate-100/80 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-cyan-100 transition-all";
                 card.innerHTML = `
                     <div class="space-y-1">
                         <div class="flex flex-wrap items-center gap-2">
-                            <h4 class="font-extrabold text-slate-800 text-base">การประเมินลำดับที่ ${filtered.length - index}</h4>
-                            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md font-bold font-mono">ID: ${audit.id.substring(0, 8)}...</span>
+                            <h4 class="font-extrabold text-slate-800 text-sm">การประเมินวันที่: ${audit.evalDate}</h4>
+                            <span class="text-[10px] bg-cyan-50 text-cyan-600 px-2 py-0.5 rounded font-bold font-mono">ID: ${audit.id.substring(6,12)}</span>
                         </div>
-                        <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-slate-500 font-medium">
-                            <span>วันที่ประเมิน: <strong class="text-slate-700 font-mono">${audit.evalDate}</strong></span>
-                            ${audit.generalNotes ? `<span class="truncate max-w-md">บันทึก: <strong class="text-slate-700">${audit.generalNotes}</strong></span>` : ''}
-                        </div>
+                        <p class="text-xs text-slate-500">${audit.generalNotes ? `หมายเหตุ: <strong>${audit.generalNotes}</strong>` : 'ไม่มีบันทึกเพิ่มเติม'}</p>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="text-xs space-y-0.5 font-bold text-slate-400">
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> ปฏิบัติ: <span class="text-slate-700 font-mono">${audit.totalComplied || 0}</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-rose-400"></span> ไม่ปฏิบัติ: <span class="text-slate-700 font-mono">${audit.totalNotComplied || 0}</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-slate-400"></span> N/A: <span class="text-slate-700 font-mono">${audit.totalNA || 0}</span>
-                            </div>
+                    <div class="flex items-center justify-between md:justify-end gap-4 border-t border-slate-50 pt-3 md:border-0 md:pt-0">
+                        <div class="text-[10px] font-bold text-slate-400 space-y-0.5">
+                            <div>ปฏิบัติ: <span class="text-emerald-600 font-mono">${audit.totalComplied}</span></div>
+                            <div>ไม่ปฏิบัติ: <span class="text-rose-500 font-mono">${audit.totalNotComplied}</span></div>
                         </div>
-                        <div class="px-4 py-3 rounded-2xl border text-center font-black ${scoreColor}">
-                            <div class="text-[10px] uppercase font-extrabold opacity-75">ความถูกต้อง</div>
-                            <div class="text-xl font-mono">${audit.complianceRate}%</div>
+                        <div class="px-3 py-1.5 rounded-xl border text-center font-black ${scoreColor} text-sm font-mono shadow-sm">${audit.complianceRate}%</div>
+                        <div class="flex gap-1">
+                            <button onclick="handleEdit('${audit.id}')" class="px-3 py-1.5 text-xs font-extrabold text-cyan-700 bg-cyan-50 hover:bg-cyan-100 rounded-xl transition-all shadow-sm">แก้ไข</button>
+                            <button onclick="handleDelete('${audit.id}')" class="p-1.5 text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl transition-all"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-end gap-2 border-t border-slate-50 pt-3 lg:border-t-0 lg:pt-0">
-                        <button onclick="handleEdit('${audit.id}')" class="px-4 py-2 text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-xl transition-all">แก้ไข</button>
-                        <button onclick="handleDelete('${audit.id}')" class="p-2 text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl transition-all" title="ลบข้อมูลรอบนี้">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        </button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1005,45 +1224,26 @@
             renderLogs();
         }
 
-        // CSV Exporter
         function handleExportCSV() {
-            if (audits.length === 0) {
-                showToast("ไม่มีข้อมูลให้ออกรายงาน", "error");
+            if (filteredAudits.length === 0) {
+                showToast("ไม่มีข้อมูลภายใต้เงื่อนไขตัวกรองนี้ให้ออกรายงาน", "error");
                 return;
             }
 
-            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; // Thai BOM support
-            
-            const headers = [
-                "รหัสบันทึก", "วันที่ประเมิน", "% ปฏิบัติถูกต้อง", "รวมข้อปฏิบัติ", "รวมข้อไม่ปฏิบัติ", "รวมข้อไม่เกี่ยวข้อง"
-            ];
-            
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+            const headers = ["รหัสบันทึก", "วันที่ประเมิน", "% ปฏิบัติถูกต้อง", "รวมข้อปฏิบัติ", "รวมข้อไม่ปฏิบัติ", "รวมข้อไม่เกี่ยวข้อง"];
             CHECKLIST_ITEMS.forEach(item => {
-                headers.push(`ข้อ ${item.id}: สถานะ`);
-                headers.push(`ข้อ ${item.id}: หมายเหตุ`);
+                headers.push(`ข้อ ${item.id} สถานะ`, `ข้อ ${item.id} หมายเหตุ`);
             });
-            headers.push("หมายเหตุทั่วไป");
+            headers.push("หมายเหตุทั่วไปภาพรวม");
 
-            csvContent += headers.map(h => `"${h.replace(/"/g, '""')}"`).join(",") + "\r\n";
-
-            audits.forEach(audit => {
-                const row = [
-                    audit.id,
-                    audit.evalDate,
-                    `${audit.complianceRate || 0}%`,
-                    audit.totalComplied || 0,
-                    audit.totalNotComplied || 0,
-                    audit.totalNA || 0
-                ];
-
+            filteredAudits.forEach(audit => {
+                const row = [audit.id, audit.evalDate, `${audit.complianceRate}%`, audit.totalComplied, audit.totalNotComplied, audit.totalNA];
                 CHECKLIST_ITEMS.forEach(item => {
                     const status = audit.checklist?.[item.id] || "na";
                     const statusText = status === 'yes' ? 'ปฏิบัติ' : status === 'no' ? 'ไม่ปฏิบัติ' : 'ไม่เกี่ยวข้อง';
-                    const note = audit.notes?.[item.id] || "";
-                    row.push(statusText);
-                    row.push(note);
+                    row.push(statusText, audit.notes?.[item.id] || "");
                 });
-
                 row.push(audit.generalNotes || "");
                 csvContent += row.map(r => `"${String(r).replace(/"/g, '""')}"`).join(",") + "\r\n";
             });
@@ -1051,11 +1251,44 @@
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `MDRO_ANONYMOUS_EXPORT_${new Date().toISOString().split('T')[0]}.csv`);
+            link.setAttribute("download", `MDR_AuditData_Report_${new Date().toISOString().split('T')[0]}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            showToast("ดาวน์โหลดไฟล์ CSV เรียบร้อยแล้ว");
+            showToast("ดาวน์โหลดไฟล์รายงาน CSV เรียบร้อย");
+        }
+
+        async function syncAllToWebhook() {
+            const webhookUrl = document.getElementById('webhook-url-input').value;
+            if (!webhookUrl) { showToast("กรุณาระบุ Webhook URL", "error"); return; }
+            if (filteredAudits.length === 0) { showToast("ไม่มีข้อมูลใหัปโหลด", "error"); return; }
+
+            showToast("กำลังซิงค์ส่งข้อมูลตามตัวกรองเข้าแผ่นงาน AuditData...", "info");
+            let successCount = 0;
+
+            for (const audit of filteredAudits) {
+                const syncPayload = {
+                    audit_date: audit.evalDate,
+                    score_yes: audit.totalComplied,
+                    score_no: audit.totalNotComplied,
+                    compliance_percent: audit.complianceRate,
+                    generalNotes: audit.generalNotes || ""
+                };
+                CHECKLIST_ITEMS.forEach(item => {
+                    syncPayload[`check${item.id}`] = audit.checklist[item.id] || "na";
+                });
+
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'no-cors',
+                        body: JSON.stringify(syncPayload)
+                    });
+                    successCount++;
+                } catch (e) { console.error(e); }
+            }
+            showToast("ซิงค์ข้อมูลเข้า AuditData สำเร็จ!");
         }
     </script>
 </body>
